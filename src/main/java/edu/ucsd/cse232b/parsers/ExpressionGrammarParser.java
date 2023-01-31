@@ -21,7 +21,7 @@ public class ExpressionGrammarParser extends Parser {
 	public static final int
 		T__0=1, STAR=2, AT=3, AND=4, OR=5, NOT=6, COMMA=7, SL=8, DSL=9, DOT=10, 
 		DQ=11, DDOT=12, LSQ=13, RSQ=14, LPR=15, RPR=16, EQ=17, IS=18, DOC=19, 
-		ID=20, OP=21, NUM=22, WS=23;
+		ID=20;
 	public static final int
 		RULE_ap = 0, RULE_rp = 1, RULE_f = 2, RULE_doc = 3, RULE_strConst = 4, 
 		RULE_fileName = 5, RULE_tagName = 6, RULE_attName = 7;
@@ -42,8 +42,7 @@ public class ExpressionGrammarParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, "STAR", "AT", "AND", "OR", "NOT", "COMMA", "SL", "DSL", "DOT", 
-			"DQ", "DDOT", "LSQ", "RSQ", "LPR", "RPR", "EQ", "IS", "DOC", "ID", "OP", 
-			"NUM", "WS"
+			"DQ", "DDOT", "LSQ", "RSQ", "LPR", "RPR", "EQ", "IS", "DOC", "ID"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -1211,7 +1210,7 @@ public class ExpressionGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31p\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\26p\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\3\2\3\2"+
 		"\3\2\3\2\3\2\5\2\33\n\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
 		"\3\5\3)\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7"+

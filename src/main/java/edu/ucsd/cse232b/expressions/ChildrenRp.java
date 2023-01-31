@@ -5,7 +5,6 @@ import org.w3c.dom.NodeList;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static org.w3c.dom.Node.ELEMENT_NODE;
 import static org.w3c.dom.Node.TEXT_NODE;

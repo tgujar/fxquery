@@ -17,29 +17,29 @@ Grammar
 
 /*Rules*/
 
-ap  :   doc SL rp       #SlAp
-    |   doc DSL rp      #DSlAp;
+ap  :   doc SL rp       #SlAp               // Ap
+    |   doc DSL rp      #DSlAp;             // Ap
 
 rp  :   tagName         #TagNameRp          // ChildrenRp
-    |   STAR            #StarRp      // ChildrenRp
+    |   STAR            #StarRp             // ChildrenRp
     |   'text()'        #TextRp             // ChildrenRp
     |   DOT             #SelfRp             // NodeRp
     |   DDOT            #ParentRp           // NodeRp
     |   AT attName      #AttrRp             // NodeRp
-    |   LPR rp LPR      #PrRp
-    |   rp SL rp        #SlRp
-    |   rp DSL rp       #DSlRp
-    |   rp LSQ f RSQ    #FilterRp
-    |   rp COMMA rp     #CommaRp ;
+    |   LPR rp LPR      #PrRp               // NodeRp
+    |   rp SL rp        #SlRp               // NestedRp
+    |   rp DSL rp       #DSlRp              // NestedRp
+    |   rp LSQ f RSQ    #FilterRp           // TODO
+    |   rp COMMA rp     #CommaRp ;          // TODO
 
-f   :   rp              #RpFilter
-    |   rp EQ rp        #EqFilter
-    |   rp IS rp        #IsFilter
-    |   rp EQ strConst  #StrConstRp
-    |   LPR f RPR       #PrFilter
-    |   f AND f         #AndFilter
-    |   f OR f          #OrFilter
-    |   NOT f           #NotFilter ;
+f   :   rp              #RpFilter          // TODO
+    |   rp EQ rp        #EqFilter          // TODO
+    |   rp IS rp        #IsFilter          // TODO
+    |   rp EQ strConst  #StrConstRp        // TODO
+    |   LPR f RPR       #PrFilter          // TODO
+    |   f AND f         #AndFilter         // TODO
+    |   f OR f          #OrFilter          // TODO
+    |   NOT f           #NotFilter ;       // TODO
 
 
 doc : DOC LPR DQ fileName DQ RPR;

@@ -29,15 +29,16 @@ public class main {
         return db.parse(new File(filename));
     }
 
+    // TODO:: Fix bug for multiple nodes written to file
     public static void format(List<Node> result) throws Exception {
         // ref: https://docs.oracle.com/javase/tutorial/jaxp/xslt/writingDom.html
         TransformerFactory tfFactory = TransformerFactory.newInstance();
         Transformer transformer = tfFactory.newTransformer();
+        StreamResult out = new StreamResult(new File("xresults.xml"));
         result.forEach(node -> {
             DOMSource source = new DOMSource(node);
             // Uncomment this line to print on terminal
 //            StreamResult out = new StreamResult(System.out);
-            StreamResult out = new StreamResult(new File("xresults.xml"));
             try {
                 transformer.transform(source, out);
             } catch (TransformerException e) {
@@ -48,7 +49,7 @@ public class main {
 
     public static void main(String[] args) throws Exception {
 
-        String query = "doc(\"j_caesar.xml\")//TITLE";
+        String query = "doc(\"j_caesar.xml\")/PLAY/FM";
         String DOC_ROOT = "j_caesar.xml";
 
         Document xmlDoc = loadXMLFrom(DOC_ROOT);

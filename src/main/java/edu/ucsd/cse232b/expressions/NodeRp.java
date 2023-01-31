@@ -1,24 +1,32 @@
 package edu.ucsd.cse232b.expressions;
 
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+
+import static edu.ucsd.cse232b.expressions.NodeRp.Type.Pr;
 
 public class NodeRp implements Expression {
 
     final private Type type;
     final private String param;
+    final private Expression rp;
 
     public NodeRp(Type type, String param) {
         this.type = type;
         this.param = param;
+        this.rp = null;
+    }
+
+    public NodeRp(Type type, String param, Expression rp) {
+        this.type = type;
+        this.param = param;
+        this.rp = rp;
     }
 
     public enum Type {
-        Self, Parent, Attr
+        Self, Parent, Attr, Pr
     }
 
     @Override
@@ -27,7 +35,11 @@ public class NodeRp implements Expression {
     }
 
     @Override
-    public List<Node> solve(List<Node> ctxList) {
+    public List<Node> solve(List<Node> ctxList) throws Exception {
+        if (type == Pr) {
+            assert rp != null;
+            return rp.solve(ctxList);
+        }
         List<Node> nodeSet = new java.util.ArrayList<>(Collections.emptyList());
         ctxList.forEach(node -> {
             switch (type) {
