@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,6 +19,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,24 +34,28 @@ public class main {
         return db.parse(new File(filename));
     }
 
-    // TODO:: Fix bug for multiple nodes written to file
-    public static void format(List<Node> result, String outputFile) throws Exception {
-        // ref: https://docs.oracle.com/javase/tutorial/jaxp/xslt/writingDom.html
+    public static Document createDoc(List<Node> result) throws Exception  {
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+        // root element
+        Document doc = docBuilder.newDocument();
+        Element rootElement = doc.createElement("RESULT");
+        doc.appendChild(rootElement);
+        result.forEach(node -> {
+                rootElement.appendChild(doc.importNode(node, true));
+        });
+        return doc;
+    }
+
+    public static void writeResult(Document doc, OutputStream o) throws Exception {
         TransformerFactory tfFactory = TransformerFactory.newInstance();
         Transformer transformer = tfFactory.newTransformer();
-        StreamResult out = new StreamResult(new File(outputFile));
-
-        result.forEach(node -> {
-            DOMSource source = new DOMSource(node);
-            // Uncomment this line to print on terminal
-//            StreamResult out = new StreamResult(System.out);
-            try {
-                transformer.transform(source, out);
-            } catch (TransformerException e) {
-                e.printStackTrace();
-            }
-        });
+        StreamResult out = new StreamResult(o);
+        DOMSource source = new DOMSource(doc);
+        transformer.transform(source, out);
     }
+
 
     public static String readFile(String filename) {
         StringBuilder res = new StringBuilder();
@@ -86,11 +93,13 @@ public class main {
 //        final Ap program = programBuilder.visit(tree);
         final AbsolutePathBuilder programBuilder = new AbsolutePathBuilder();
         final AbsolutePath program = programBuilder.visit(tree);
-        System.out.println(program.toString());
+//        System.out.println(program.toString());
         List<Node> ctxList = new ArrayList<>();
         ctxList.add(xmlDoc);
         List<Node> result = program.solve(ctxList);
-        System.out.println(result.size());
-        format(result, output_file);
+//        System.out.println(result.size());
+        FileOutputStream f = new FileOutputStream(output_file);
+        Document doc = createDoc(result);
+        writeResult(doc, f);
     }
 }
