@@ -17,8 +17,8 @@ Grammar
 
 /*Rules*/
 
-ap  :   doc SL rp       #SlAp               // Ap
-    |   doc DSL rp      #DSlAp;             // Ap
+ap  :  doc DSL rp      #DSlAp               // Ap
+    | doc SL rp       #SlAp;               // Ap
 
 rp  :   tagName         #TagNameRp          // ChildrenRp
     |   STAR            #StarRp             // ChildrenRp
@@ -27,8 +27,8 @@ rp  :   tagName         #TagNameRp          // ChildrenRp
     |   DDOT            #ParentRp           // NodeRp
     |   AT attName      #AttrRp             // NodeRp
     |   LPR rp LPR      #PrRp               // NodeRp
-    |   rp SL rp        #SlRp               // NestedRp
     |   rp DSL rp       #DSlRp              // NestedRp
+    |   rp SL rp        #SlRp               // NestedRp
     |   rp LSQ f RSQ    #FilterRp           // TODO
     |   rp COMMA rp     #CommaRp ;          // TODO
 

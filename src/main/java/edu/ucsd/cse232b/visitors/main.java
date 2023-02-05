@@ -1,6 +1,6 @@
 package edu.ucsd.cse232b.visitors;
 
-import edu.ucsd.cse232b.expressions.Ap;
+import edu.ucsd.cse232b.expressions.absolute.AbsolutePath;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarLexer;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
 import org.antlr.v4.runtime.CharStreams;
@@ -37,6 +37,7 @@ public class main {
         TransformerFactory tfFactory = TransformerFactory.newInstance();
         Transformer transformer = tfFactory.newTransformer();
         StreamResult out = new StreamResult(new File(outputFile));
+
         result.forEach(node -> {
             DOMSource source = new DOMSource(node);
             // Uncomment this line to print on terminal
@@ -81,11 +82,15 @@ public class main {
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
         final ExpressionGrammarParser parser = new ExpressionGrammarParser(tokens);
         final ParserRuleContext tree = parser.ap();
-        final ProgramBuilder programBuilder = new ProgramBuilder();
-        final Ap program = programBuilder.visit(tree);
+//        final ProgramBuilder programBuilder = new ProgramBuilder();
+//        final Ap program = programBuilder.visit(tree);
+        final AbsolutePathBuilder programBuilder = new AbsolutePathBuilder();
+        final AbsolutePath program = programBuilder.visit(tree);
+        System.out.println(program.toString());
         List<Node> ctxList = new ArrayList<>();
         ctxList.add(xmlDoc);
         List<Node> result = program.solve(ctxList);
+        System.out.println(result.size());
         format(result, output_file);
     }
 }
