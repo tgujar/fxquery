@@ -17,11 +17,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class main {
-
+    private static final String DOCROOT = "j_caesar.xml";
     public static Document loadXMLFrom(String filename) throws Exception {
         // ref: https://docs.oracle.com/javase/tutorial/jaxp/dom/readingXML.html
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -30,11 +32,11 @@ public class main {
     }
 
     // TODO:: Fix bug for multiple nodes written to file
-    public static void format(List<Node> result) throws Exception {
+    public static void format(List<Node> result, String outputFile) throws Exception {
         // ref: https://docs.oracle.com/javase/tutorial/jaxp/xslt/writingDom.html
         TransformerFactory tfFactory = TransformerFactory.newInstance();
         Transformer transformer = tfFactory.newTransformer();
-        StreamResult out = new StreamResult(new File("xresults.xml"));
+        StreamResult out = new StreamResult(new File(outputFile));
         result.forEach(node -> {
             DOMSource source = new DOMSource(node);
             // Uncomment this line to print on terminal
@@ -47,12 +49,33 @@ public class main {
         });
     }
 
+    public static String readFile(String filename) {
+        StringBuilder res = new StringBuilder();
+        try {
+            File myObj = new File(filename);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                res.append(myReader.nextLine());
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Invalid file path");
+        }
+        return res.toString();
+    }
+
     public static void main(String[] args) throws Exception {
+        start(args);
+    }
 
-        String query = "doc(\"j_caesar.xml\")/PLAY/FM";
-        String DOC_ROOT = "j_caesar.xml";
+    public static void start(String[] args) throws Exception {
+        if (args.length != 2) {
+            System.out.println("Format: <Input_XPath_File name, for example XPath.txt> <output file name, for example, output.xml>");
+        }
+        String query = readFile(args[0]);
+        String output_file = args[1];
 
-        Document xmlDoc = loadXMLFrom(DOC_ROOT);
+        Document xmlDoc = loadXMLFrom(DOCROOT);
         // ref: https://github.com/vishalkks/antlr-tutorial
         final ExpressionGrammarLexer lexer = new ExpressionGrammarLexer(CharStreams.fromString(query));
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -63,6 +86,6 @@ public class main {
         List<Node> ctxList = new ArrayList<>();
         ctxList.add(xmlDoc);
         List<Node> result = program.solve(ctxList);
-        format(result);
+        format(result, output_file);
     }
 }
