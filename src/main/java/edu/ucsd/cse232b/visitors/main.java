@@ -12,6 +12,7 @@ import org.w3c.dom.Node;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -51,6 +52,8 @@ public class main {
     public static void writeResult(Document doc, OutputStream o) throws Exception {
         TransformerFactory tfFactory = TransformerFactory.newInstance();
         Transformer transformer = tfFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes"); // omit xml version tag
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         StreamResult out = new StreamResult(o);
         DOMSource source = new DOMSource(doc);
         transformer.transform(source, out);
@@ -89,15 +92,13 @@ public class main {
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
         final ExpressionGrammarParser parser = new ExpressionGrammarParser(tokens);
         final ParserRuleContext tree = parser.ap();
-//        final ProgramBuilder programBuilder = new ProgramBuilder();
-//        final Ap program = programBuilder.visit(tree);
         final AbsolutePathBuilder programBuilder = new AbsolutePathBuilder();
         final AbsolutePath program = programBuilder.visit(tree);
-//        System.out.println(program.toString());
+
         List<Node> ctxList = new ArrayList<>();
         ctxList.add(xmlDoc);
         List<Node> result = program.solve(ctxList);
-//        System.out.println(result.size());
+
         FileOutputStream f = new FileOutputStream(output_file);
         Document doc = createDoc(result);
         writeResult(doc, f);
