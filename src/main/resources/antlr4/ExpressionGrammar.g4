@@ -17,29 +17,31 @@ Grammar
 
 /*Rules*/
 
-ap  :  doc DSL rp      #DSlAp               // Ap
-    | doc SL rp       #SlAp;               // Ap
+ap  :  doc DSL rp      #DSlAp
+    | doc SL rp       #SlAp;
 
-rp  :   tagName         #TagNameRp          // ChildrenRp
-    |   STAR            #StarRp             // ChildrenRp
-    |   'text()'        #TextRp             // ChildrenRp
-    |   DOT             #SelfRp             // NodeRp
-    |   DDOT            #ParentRp           // NodeRp
-    |   AT attName      #AttrRp             // NodeRp
-    |   LPR rp LPR      #PrRp               // NodeRp
-    |   rp DSL rp       #DSlRp              // NestedRp
-    |   rp SL rp        #SlRp               // NestedRp
-    |   rp LSQ f RSQ    #FilterRp           // TODO
-    |   rp COMMA rp     #CommaRp ;          // TODO
+rp  :
+        LPR rp RPR      #PrRp
+    |   rp LSQ f RSQ    #FilterRp
+    |   rp DSL rp       #DSlRp
+    |   rp SL rp        #SlRp
+    |   rp COMMA rp     #CommaRp
+    |   tagName         #TagNameRp
+    |   STAR            #StarRp
+    |   'text()'        #TextRp
+    |   DDOT            #ParentRp
+    |   DOT             #SelfRp
+    |   AT attName      #AttrRp;
 
-f   :   rp              #RpFilter          // TODO
-    |   rp EQ rp        #EqFilter          // TODO
-    |   rp IS rp        #IsFilter          // TODO
-    |   rp EQ strConst  #StrConstRp        // TODO
-    |   LPR f RPR       #PrFilter          // TODO
-    |   f AND f         #AndFilter         // TODO
-    |   f OR f          #OrFilter          // TODO
-    |   NOT f           #NotFilter ;       // TODO
+f
+    :   LPR f RPR       #PrFilter
+    |   NOT f           #NotFilter
+    |   f AND f         #AndFilter
+    |   f OR f          #OrFilter
+    |   rp IS rp        #IsFilter
+    |   rp EQ rp        #EqFilter
+    |   rp EQ strConst  #StrConstRp
+    |   rp              #RpFilter ;
 
 
 doc : DOC LPR DQ fileName DQ RPR;
@@ -52,9 +54,9 @@ attName     : ID ;
 /*Tokens*/
 STAR: '*';
 AT: '@';
+NOT: [nN][oO][tT];
 AND: [aA][nN][dD];
 OR: [oO][rR];
-NOT: [nN][oO][tT];
 COMMA: ',';
 SL: '/';
 DSL: '//';
@@ -69,3 +71,4 @@ EQ: '=' | 'eq';
 IS: '==' | 'is';
 DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
 ID: [a-zA-Z][a-zA-Z0-9_.-]*;
+WS : [ \t\r\n]+ -> skip ;

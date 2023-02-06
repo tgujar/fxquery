@@ -1,4 +1,4 @@
-// Generated from ExpressionGrammar.g4 by ANTLR 4.7.2
+// Generated from java-escape by ANTLR 4.11.1
 
 package edu.ucsd.cse232b.parsers;
 
@@ -12,19 +12,8 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
+@SuppressWarnings("CheckReturnValue")
 public class ExpressionGrammarBaseListener implements ExpressionGrammarListener {
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSlAp(ExpressionGrammarParser.SlApContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSlAp(ExpressionGrammarParser.SlApContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -37,6 +26,18 @@ public class ExpressionGrammarBaseListener implements ExpressionGrammarListener 
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDSlAp(ExpressionGrammarParser.DSlApContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSlAp(ExpressionGrammarParser.SlApContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSlAp(ExpressionGrammarParser.SlApContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -198,18 +199,6 @@ public class ExpressionGrammarBaseListener implements ExpressionGrammarListener 
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterNotFilter(ExpressionGrammarParser.NotFilterContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -217,6 +206,18 @@ public class ExpressionGrammarBaseListener implements ExpressionGrammarListener 
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNotFilter(ExpressionGrammarParser.NotFilterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,4 +1,4 @@
-// Generated from ExpressionGrammar.g4 by ANTLR 4.7.2
+// Generated from java-escape by ANTLR 4.11.1
 
 package edu.ucsd.cse232b.parsers;
 
@@ -9,18 +9,6 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link ExpressionGrammarParser}.
  */
 public interface ExpressionGrammarListener extends ParseTreeListener {
-	/**
-	 * Enter a parse tree produced by the {@code SlAp}
-	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
-	 * @param ctx the parse tree
-	 */
-	void enterSlAp(ExpressionGrammarParser.SlApContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code SlAp}
-	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
-	 * @param ctx the parse tree
-	 */
-	void exitSlAp(ExpressionGrammarParser.SlApContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code DSlAp}
 	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
@@ -33,6 +21,18 @@ public interface ExpressionGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDSlAp(ExpressionGrammarParser.DSlApContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SlAp}
+	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
+	 * @param ctx the parse tree
+	 */
+	void enterSlAp(ExpressionGrammarParser.SlApContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SlAp}
+	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
+	 * @param ctx the parse tree
+	 */
+	void exitSlAp(ExpressionGrammarParser.SlApContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code SlRp}
 	 * labeled alternative in {@link ExpressionGrammarParser#rp}.
@@ -190,18 +190,6 @@ public interface ExpressionGrammarListener extends ParseTreeListener {
 	 */
 	void exitIsFilter(ExpressionGrammarParser.IsFilterContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StrConstRp}
-	 * labeled alternative in {@link ExpressionGrammarParser#f}.
-	 * @param ctx the parse tree
-	 */
-	void enterStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code StrConstRp}
-	 * labeled alternative in {@link ExpressionGrammarParser#f}.
-	 * @param ctx the parse tree
-	 */
-	void exitStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code NotFilter}
 	 * labeled alternative in {@link ExpressionGrammarParser#f}.
 	 * @param ctx the parse tree
@@ -213,6 +201,18 @@ public interface ExpressionGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNotFilter(ExpressionGrammarParser.NotFilterContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StrConstRp}
+	 * labeled alternative in {@link ExpressionGrammarParser#f}.
+	 * @param ctx the parse tree
+	 */
+	void enterStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StrConstRp}
+	 * labeled alternative in {@link ExpressionGrammarParser#f}.
+	 * @param ctx the parse tree
+	 */
+	void exitStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code PrFilter}
 	 * labeled alternative in {@link ExpressionGrammarParser#f}.
