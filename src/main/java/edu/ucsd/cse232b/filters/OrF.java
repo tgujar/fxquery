@@ -14,7 +14,7 @@ public class OrF implements Filter{
     }
     @Override
     public boolean solve(List<Node> ctxList) throws Exception {
-        return f1.solve(ctxList) && f2.solve(ctxList);
+        return f1.solve(ctxList) || f2.solve(ctxList);
     }
     @Override
     public String toString() { return String.format("%s or %s", f1.toString(), f2.toString());}

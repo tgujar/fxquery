@@ -12,7 +12,7 @@ public class NotF implements Filter{
     }
     @Override
     public boolean solve(List<Node> ctxList) throws Exception {
-        return f.solve(ctxList);
+        return !f.solve(ctxList);
     }
     @Override
     public String toString() { return String.format("not %s", f.toString());}

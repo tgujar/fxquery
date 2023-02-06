@@ -14,7 +14,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -28,6 +27,7 @@ import java.util.Scanner;
 
 public class main {
     private static final String DOCROOT = "j_caesar.xml";
+
     public static Document loadXMLFrom(String filename) throws Exception {
         // ref: https://docs.oracle.com/javase/tutorial/jaxp/dom/readingXML.html
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -35,7 +35,7 @@ public class main {
         return db.parse(new File(filename));
     }
 
-    public static Document createDoc(List<Node> result) throws Exception  {
+    public static Document createDoc(List<Node> result) throws Exception {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
@@ -44,7 +44,7 @@ public class main {
         Element rootElement = doc.createElement("RESULT");
         doc.appendChild(rootElement);
         result.forEach(node -> {
-                rootElement.appendChild(doc.importNode(node, true));
+            rootElement.appendChild(doc.importNode(node, true));
         });
         return doc;
     }
@@ -54,6 +54,7 @@ public class main {
         Transformer transformer = tfFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes"); // omit xml version tag
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty(OutputKeys.METHOD, "html");
         StreamResult out = new StreamResult(o);
         DOMSource source = new DOMSource(doc);
         transformer.transform(source, out);
