@@ -1,4 +1,4 @@
-// Generated from ExpressionGrammar.g4 by ANTLR 4.7.2
+// Generated from java-escape by ANTLR 4.11.1
 
 package edu.ucsd.cse232b.parsers;
 
@@ -13,19 +13,19 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by the {@code SlAp}
-	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSlAp(ExpressionGrammarParser.SlApContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code DSlAp}
 	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDSlAp(ExpressionGrammarParser.DSlApContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SlAp}
+	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSlAp(ExpressionGrammarParser.SlApContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code SlRp}
 	 * labeled alternative in {@link ExpressionGrammarParser#rp}.
@@ -118,19 +118,19 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIsFilter(ExpressionGrammarParser.IsFilterContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code StrConstRp}
-	 * labeled alternative in {@link ExpressionGrammarParser#f}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code NotFilter}
 	 * labeled alternative in {@link ExpressionGrammarParser#f}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitNotFilter(ExpressionGrammarParser.NotFilterContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code StrConstRp}
+	 * labeled alternative in {@link ExpressionGrammarParser#f}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code PrFilter}
 	 * labeled alternative in {@link ExpressionGrammarParser#f}.
