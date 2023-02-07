@@ -53,7 +53,7 @@ public class main {
         TransformerFactory tfFactory = TransformerFactory.newInstance();
         Transformer transformer = tfFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes"); // omit xml version tag
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.METHOD, "html");
         StreamResult out = new StreamResult(o);
         DOMSource source = new DOMSource(doc);
