@@ -16,7 +16,7 @@ public class RpEqStringF implements Filter{
     @Override
     public boolean solve(List<Node> ctxList) throws Exception {
         List<Node> nodes = rp.solve(ctxList);
-        return nodes.stream().anyMatch(n -> n.toString().equals(sc));
+        return nodes.stream().anyMatch(n ->  n.getTextContent().equals(sc));
     }
 
     @Override
