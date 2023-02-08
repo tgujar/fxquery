@@ -12,6 +12,7 @@ public class ApSlash implements AbsolutePath {
     public ApSlash(RelativePath child) {
         this.child = child;
     }
+
     @Override
     public List<Node> solve(List<Node> ctxList) throws Exception {
         return child.solve(ctxList);

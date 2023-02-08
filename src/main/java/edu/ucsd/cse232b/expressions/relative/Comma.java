@@ -4,7 +4,7 @@ import org.w3c.dom.Node;
 
 import java.util.List;
 
-public class Comma implements RelativePath{
+public class Comma implements RelativePath {
 
     private final RelativePath rp1;
     private final RelativePath rp2;

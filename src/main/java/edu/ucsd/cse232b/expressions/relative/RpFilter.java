@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RpFilter implements RelativePath{
+public class RpFilter implements RelativePath {
 
     private final Filter f;
     private final RelativePath rp;
@@ -17,6 +17,7 @@ public class RpFilter implements RelativePath{
         this.f = f;
         this.rp = rp;
     }
+
     @Override
     public List<Node> solve(List<Node> ctxList) throws Exception {
         List<Node> nodes = rp.solve(ctxList);

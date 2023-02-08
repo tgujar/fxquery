@@ -1,7 +1,7 @@
 package edu.ucsd.cse232b.visitors;
 
 
-import edu.ucsd.cse232b.expressions.relative.*;
+import edu.ucsd.cse232b.expressions.relative.RelativePath;
 import edu.ucsd.cse232b.filters.*;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarBaseVisitor;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
@@ -54,6 +54,7 @@ public class FilterBuilder extends ExpressionGrammarBaseVisitor<Filter> {
         Filter f2 = visit(ctx.f(1));
         return new OrF(f1, f2);
     }
+
     @Override
     public Filter visitNotFilter(ExpressionGrammarParser.NotFilterContext ctx) {
         Filter f = visit(ctx.f());

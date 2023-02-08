@@ -5,15 +5,14 @@ import org.w3c.dom.Node;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.w3c.dom.Node.TEXT_NODE;
-
-public class Attr implements RelativePath{
+public class Attr implements RelativePath {
 
     private final String attrName;
 
     public Attr(String attrName) {
         this.attrName = attrName;
     }
+
     @Override
     public List<Node> solve(List<Node> ctxList) throws Exception {
         return ctxList.stream().map(node -> node.getAttributes().getNamedItem(attrName)).collect(Collectors.toList());

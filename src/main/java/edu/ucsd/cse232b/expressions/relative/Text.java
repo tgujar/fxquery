@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import static org.w3c.dom.Node.TEXT_NODE;
 
-public class Text implements RelativePath{
+public class Text implements RelativePath {
     @Override
     public List<Node> solve(List<Node> ctxList) throws Exception {
         Star st = new Star();

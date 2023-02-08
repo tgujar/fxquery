@@ -3,9 +3,8 @@ package edu.ucsd.cse232b.expressions.relative;
 import org.w3c.dom.Node;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Paren implements RelativePath{
+public class Paren implements RelativePath {
 
     private final RelativePath rp;
 
@@ -20,6 +19,6 @@ public class Paren implements RelativePath{
 
     @Override
     public String toString() {
-        return "(" + rp.toString() +")";
+        return "(" + rp.toString() + ")";
     }
 }

@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface Filter {
     boolean solve(List<Node> ctxList) throws Exception;
+
     String toString();
 }

@@ -6,7 +6,7 @@ import org.w3c.dom.NodeList;
 import java.util.Collections;
 import java.util.List;
 
-public class Star implements RelativePath{
+public class Star implements RelativePath {
     @Override
     public List<Node> solve(List<Node> ctxList) throws Exception {
         List<Node> nodeSet = new java.util.ArrayList<>(Collections.emptyList());

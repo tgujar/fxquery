@@ -5,14 +5,16 @@ import org.w3c.dom.Node;
 
 import java.util.List;
 
-public class RpIsRpF implements Filter{
+public class RpIsRpF implements Filter {
     final private RelativePath rp1;
     final private RelativePath rp2;
+
     public RpIsRpF(RelativePath rp1, RelativePath rp2) {
 
         this.rp1 = rp1;
         this.rp2 = rp2;
     }
+
     @Override
     public boolean solve(List<Node> ctxList) throws Exception {
         List<Node> l1 = rp1.solve(ctxList);
@@ -21,5 +23,7 @@ public class RpIsRpF implements Filter{
     }
 
     @Override
-    public String toString() { return String.format("%s is %s", rp1.toString(), rp2.toString());}
+    public String toString() {
+        return String.format("%s is %s", rp1.toString(), rp2.toString());
+    }
 }
