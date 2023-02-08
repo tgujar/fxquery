@@ -3,6 +3,7 @@ package edu.ucsd.cse232b.expressions.relative;
 import org.w3c.dom.Node;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Slash implements RelativePath {
 
@@ -15,7 +16,7 @@ public class Slash implements RelativePath {
 
     @Override
     public List<Node> solve(List<Node> ctxList) throws Exception {
-        return child.solve(parent.solve(ctxList));
+        return child.solve(parent.solve(ctxList)).stream().distinct().collect(Collectors.toList());
     }
 
     @Override

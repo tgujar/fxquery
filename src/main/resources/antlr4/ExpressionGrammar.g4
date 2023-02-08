@@ -46,7 +46,7 @@ f
 
 doc : DOC LPR DQ fileName DQ RPR;
 
-strConst    : DQ ID DQ ;
+strConst    : DQ ID DQ;
 fileName    : ID ;
 tagName     : ID ;
 attName     : ID ;

@@ -19,7 +19,7 @@ public class RpEqRpF implements Filter {
     public boolean solve(List<Node> ctxList) throws Exception {
         List<Node> l1 = rp1.solve(ctxList);
         List<Node> l2 = rp1.solve(ctxList);
-        return l1.stream().anyMatch(n1 -> l2.stream().anyMatch(n1::isSameNode));
+        return l1.stream().anyMatch(n1 -> l2.stream().anyMatch(n1::isEqualNode));
     }
 
     @Override
