@@ -16,7 +16,7 @@ Grammar
 */
 
 /*Rules*/
-
+//TODO: fix milestone 1
 ap  :  doc DSL rp      #DSlAp
     | doc SL rp       #SlAp;
 
@@ -44,15 +44,31 @@ f
     |   rp              #RpFilter ;
 
 
+// XQuery
+x
+    : DOLLAR ID                     #VarX
+    | MT LPR strConst RPR           #TextX
+    | ap                            #ApX
+    | LPR x RPR                     #PrX
+    | x COMMA x                     #CommaX
+    | x SL rp                       #CSlRpX
+    | x DSL rp                      #DSLRpX
+    | tagOpen LCR x RCR tagClose    #TagX
+    | x EQ x                        #EqX
+    | x IS x                        #IsX;
+
 doc : DOC LPR DQ fileName DQ RPR;
 
 strConst    : DQ ID DQ;
 fileName    : ID ;
 tagName     : ID ;
 attName     : ID ;
+tagOpen     : LAG tagName RAG;
+tagClose    : LAG SL tagName RAG;
 
 /*Tokens*/
 STAR: '*';
+DOLLAR: '$';
 AT: '@';
 NOT: [nN][oO][tT];
 AND: [aA][nN][dD];
@@ -67,8 +83,13 @@ LSQ: '[';
 RSQ: ']';
 LPR: '(';
 RPR: ')';
+LAG: '<';
+RAG: '>';
+LCR: '{';
+RCR: '}';
 EQ: '=' | 'eq';
 IS: '==' | 'is';
 DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
 ID: [a-zA-Z][a-zA-Z0-9_.-]*;
+MT: 'makeText';
 WS : [ \t\r\n]+ -> skip ;
