@@ -45,17 +45,19 @@ f
 
 
 // XQuery
+
 x
-    : DOLLAR ID                     #VarX
-    | MT LPR strConst RPR           #TextX
-    | ap                            #ApX
-    | LPR x RPR                     #PrX
-    | x COMMA x                     #CommaX
-    | x SL rp                       #CSlRpX
-    | x DSL rp                      #DSLRpX
-    | tagOpen LCR x RCR tagClose    #TagX
-    | x EQ x                        #EqX
-    | x IS x                        #IsX;
+    : LCR DOLLAR ID                  RCR    #VarX
+    | LCR MT LPR strConst RPR        RCR    #TextX
+    | LCR ap                         RCR    #ApX
+    | LCR LPR x RPR                  RCR    #PrX
+    | LCR x COMMA x                  RCR    #CommaX
+    | LCR x SL rp                    RCR    #CSlRpX
+    | LCR x DSL rp                   RCR    #DSLRpX
+    | LCR tagOpen LCR x RCR tagClose RCR    #TagX
+    | LCR x EQ x                     RCR    #EqX
+    | LCR x IS x                     RCR    #IsX;
+
 
 doc : DOC LPR DQ fileName DQ RPR;
 

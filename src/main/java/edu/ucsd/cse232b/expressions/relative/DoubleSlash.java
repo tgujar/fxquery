@@ -25,14 +25,6 @@ public class DoubleSlash implements RelativePath {
         return self.stream().distinct().collect(Collectors.toList());
     }
 
-    private List<Node> solveWithParent(List<Node> parent) throws Exception {
-        if (parent.isEmpty()) return new ArrayList<>(Collections.emptyList());
-        List<Node> self = child.solve(parent);
-        List<Node> children = (new Star()).solve(parent);
-        self.addAll(solveWithParent(children));
-        return self;
-    }
-
     @Override
     public String toString() {
         return parent.toString() + "//" + child.toString();

@@ -98,7 +98,7 @@ public class main {
 
         List<Node> ctxList = new ArrayList<>();
         ctxList.add(xmlDoc);
-        List<Node> result = program.solve(ctxList);
+        List<Node> result = program.solve(ctxList, xmlDoc);
 
         FileOutputStream f = new FileOutputStream(output_file);
         Document doc = createDoc(result);

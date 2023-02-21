@@ -71,4 +71,5 @@ EQ: '=' | 'eq';
 IS: '==' | 'is';
 DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
 ID: [a-zA-Z][a-zA-Z0-9_.-]*;
+//ID2: '"' (~["\\] | '\\' .)* '"';
 WS : [ \t\r\n]+ -> skip ;
