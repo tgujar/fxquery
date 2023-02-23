@@ -18,9 +18,9 @@ public class DoubleSlash implements ContextExp{
     private final ContextExp ce;
 
 
-    public DoubleSlash(ContextExp ce, RelativePath child) {
-        this.ce = ce;
+    public DoubleSlash(RelativePath child, ContextExp ce) {
         this.child = child;
+        this.ce = ce;
     }
 
     @Override
