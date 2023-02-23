@@ -47,20 +47,37 @@ f
 // XQuery
 
 x
-    : LCR DOLLAR ID                  RCR    #VarX
-    | LCR MT LPR strConst RPR        RCR    #TextX
-    | LCR ap                         RCR    #ApX
-    | LCR LPR x RPR                  RCR    #PrX
-    | LCR x COMMA x                  RCR    #CommaX
-    | LCR x SL rp                    RCR    #CSlRpX
-    | LCR x DSL rp                   RCR    #DSLRpX
-    | LCR tagOpen LCR x RCR tagClose RCR    #TagX
-    | LCR x EQ x                     RCR    #EqX
-    | LCR x IS x                     RCR    #IsX;
+    : LCR var                                           RCR    #VarX
+    | LCR MT LPR strConst RPR                           RCR    #TextX
+    | LCR ap                                            RCR    #ApX
+    | LCR LPR x RPR                                     RCR    #PrX
+    | LCR x COMMA x                                     RCR    #CommaX
+    | LCR x SL rp                                       RCR    #CSlRpX
+    | LCR x DSL rp                                      RCR    #DSLRpX
+    | LCR tagOpen LCR x RCR tagClose                    RCR    #TagX
+    | LCR x EQ x                                        RCR    #EqX
+    | LCR x IS x                                        RCR    #IsX
+    | LCR forClause letClause whereClause returnClause  RCR    #ForX
+    | LCR letClause x                                   RCR    #LetX;
 
+forClause : FOR var IN x (COMMA var IN x)* ;
+letClause : LET var ASSIGN x (COMMA var ASSIGN x)* ;
+whereClause : WHERE cond ;
+returnClause : RETURN x ;
+
+cond
+    : x EQ x                                                    #EqCond
+    | x IS x                                                    #IsCond
+    | EMPTY LPR x RPR                                         #EmptyCond
+    | SOME var IN x (COMMA var IN x)* SATISFIES cond      #SatisfiesCond
+    | LPR cond RPR                                              #PrCond
+    | cond AND cond                                           #AndCond
+    | cond OR cond                                            #OrCond
+    | NOT cond                                                #NotCond;
 
 doc : DOC LPR DQ fileName DQ RPR;
 
+var         : DOLLAR ID;
 strConst    : DQ ID DQ;
 fileName    : ID ;
 tagName     : ID ;
@@ -94,4 +111,13 @@ IS: '==' | 'is';
 DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
 ID: [a-zA-Z][a-zA-Z0-9_.-]*;
 MT: 'makeText';
+FOR: 'for';
+LET: 'let';
+IN:  'in';
+ASSIGN: ':=';
+WHERE: 'where';
+RETURN: 'return';
+EMPTY: 'empty';
+SOME: 'some';
+SATISFIES: 'satisfies';
 WS : [ \t\r\n]+ -> skip ;
