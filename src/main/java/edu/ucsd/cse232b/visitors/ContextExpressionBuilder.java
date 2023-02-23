@@ -7,6 +7,7 @@ import edu.ucsd.cse232b.parsers.ExpressionGrammarBaseVisitor;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
 
 import java.util.Collections;
+import java.util.List;
 
 public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<ContextExp> {
 
@@ -51,5 +52,15 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
         RelativePath rp = (new RelativePathBuilder()).visit(ctx.rp());
         ContextExp exp = visit(ctx.x());
         return new DoubleSlash(rp, exp);
+    }
+
+    @Override
+    public ContextExp visitLetX(ExpressionGrammarParser.LetXContext ctx) {
+        List<ExpressionGrammarParser.VarContext> vars = ctx.letClause().var();
+        List<ExpressionGrammarParser.XContext> xs = ctx.letClause().x();
+        List<String> varNames = vars.stream().map(var -> var.ID().toString()).toList();
+        List<ContextExp> ctXExpressions = xs.stream().map(this::visit).toList();
+        ContextExp ce = visit(ctx.x());
+        return new Let(varNames, ctXExpressions, ce);
     }
 }

@@ -57,7 +57,7 @@ x
     | LCR tagOpen LCR x RCR tagClose                    RCR    #TagX
     | LCR x EQ x                                        RCR    #EqX
     | LCR x IS x                                        RCR    #IsX
-    | LCR forClause letClause whereClause returnClause  RCR    #ForX
+    | LCR forClause letClause? whereClause? returnClause  RCR    #ForX
     | LCR letClause x                                   RCR    #LetX;
 
 forClause : FOR var IN x (COMMA var IN x)* ;
