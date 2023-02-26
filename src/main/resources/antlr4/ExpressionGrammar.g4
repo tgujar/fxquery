@@ -77,11 +77,12 @@ cond
 
 doc : DOC LPR DQ fileName DQ RPR;
 
+
 var         : DOLLAR ID;
-strConst    : DQ STR DQ | DQ DQ;
+strConst    : STR;
 fileName    : ID ;
 tagName     : ID ;
-attName     : ID ;
+attName     : ID;
 tagOpen     : LAG tagName RAG;
 tagClose    : LAG SL tagName RAG;
 
@@ -110,7 +111,7 @@ EQ: '=' | 'eq';
 IS: '==' | 'is';
 DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
 ID: [a-zA-Z0-9_.-]+;
-STR: (',' | '!' | '.' | ':' | '?' | '-' | [ a-zA-Z0-9])+;
+STR: ["]('.' | '!' | '?' | '-' | ',' | ':' | ';' | [ a-zA-Z0-9])*["];
 MT: 'makeText';
 FOR: 'for';
 LET: 'let';

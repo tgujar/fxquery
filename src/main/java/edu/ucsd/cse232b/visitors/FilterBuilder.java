@@ -30,9 +30,9 @@ public class FilterBuilder extends ExpressionGrammarBaseVisitor<Filter> {
 
     @Override
     public Filter visitStrConstRp(ExpressionGrammarParser.StrConstRpContext ctx) {
-        String sc = ctx.strConst().ID().getText();
+        String sc = ctx.strConst().getText();
         RelativePath rp = (new RelativePathBuilder()).visit(ctx.rp());
-        return new RpEqStringF(rp, sc);
+        return new RpEqStringF(rp, sc.substring(1, sc.length() - 1));
     }
 
     @Override
