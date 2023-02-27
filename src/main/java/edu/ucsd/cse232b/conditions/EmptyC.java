@@ -4,6 +4,8 @@ import edu.ucsd.cse232b.Context;
 import edu.ucsd.cse232b.expressions.contextual.ContextExp;
 import org.w3c.dom.Document;
 
+import java.util.Stack;
+
 public class EmptyC implements Condition {
     private final ContextExp ce;
 
@@ -12,7 +14,7 @@ public class EmptyC implements Condition {
     }
 
     @Override
-    public boolean solve(Context c, Document doc) throws Exception {
+    public boolean solve(Stack<Context> c, Document doc) throws Exception {
         return this.ce.solve(c, doc).isEmpty();
     }
 

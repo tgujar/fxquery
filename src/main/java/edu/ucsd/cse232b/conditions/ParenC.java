@@ -3,6 +3,8 @@ package edu.ucsd.cse232b.conditions;
 import edu.ucsd.cse232b.Context;
 import org.w3c.dom.Document;
 
+import java.util.Stack;
+
 public class ParenC implements Condition {
     private final Condition c;
 
@@ -11,7 +13,7 @@ public class ParenC implements Condition {
     }
 
     @Override
-    public boolean solve(Context c, Document doc) throws Exception {
+    public boolean solve(Stack<Context> c, Document doc) throws Exception {
         return this.c.solve(c, doc);
     }
 

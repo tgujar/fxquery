@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 public class StrConst implements ContextExp {
     private final String str;
@@ -15,7 +16,7 @@ public class StrConst implements ContextExp {
     }
 
     @Override
-    public List<Node> solve(Context ctx, Document doc) throws Exception {
+    public List<Node> solve(Stack<Context> ctx, Document doc) throws Exception {
         return Collections.singletonList(doc.createTextNode(this.str));
     }
 

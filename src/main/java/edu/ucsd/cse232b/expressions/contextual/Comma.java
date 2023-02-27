@@ -1,12 +1,11 @@
 package edu.ucsd.cse232b.expressions.contextual;
 
 import edu.ucsd.cse232b.Context;
-import edu.ucsd.cse232b.expressions.relative.RelativePath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import javax.print.Doc;
 import java.util.List;
+import java.util.Stack;
 
 public class Comma implements ContextExp{
     private final ContextExp ce1;
@@ -18,7 +17,7 @@ public class Comma implements ContextExp{
     }
 
     @Override
-    public List<Node> solve(Context c, Document doc) throws Exception {
+    public List<Node> solve(Stack<Context> c, Document doc) throws Exception {
         List<Node> l1 = ce1.solve(c, doc);
         l1.addAll(ce2.solve(c, doc));
         return l1;

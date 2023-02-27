@@ -1,15 +1,22 @@
 package edu.ucsd.cse232b.visitors;
 
+import edu.ucsd.cse232b.Context;
 import edu.ucsd.cse232b.expressions.absolute.AbsolutePath;
 import edu.ucsd.cse232b.expressions.contextual.*;
 import edu.ucsd.cse232b.expressions.relative.RelativePath;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarBaseVisitor;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<ContextExp> {
+
+    Stack<Context> st;
+    Document doc;
 
     @Override
     public ContextExp visitApX(ExpressionGrammarParser.ApXContext ctx) {
@@ -58,9 +65,20 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
     public ContextExp visitLetX(ExpressionGrammarParser.LetXContext ctx) {
         List<ExpressionGrammarParser.VarContext> vars = ctx.letClause().var();
         List<ExpressionGrammarParser.XContext> xs = ctx.letClause().x();
-        List<String> varNames = vars.stream().map(var -> var.ID().toString()).toList();
-        List<ContextExp> ctXExpressions = xs.stream().map(this::visit).toList();
-        ContextExp ce = visit(ctx.x());
-        return new Let(varNames, ctXExpressions, ce);
+        iterateLet(ctx, vars, xs, 0);
+        return visit(ctx.x());
+    }
+
+    private void iterateLet(ExpressionGrammarParser.LetXContext ctx, List<ExpressionGrammarParser.VarContext> vars, List<ExpressionGrammarParser.XContext> xs, int index) {
+        if (index == vars.size()) {
+            return;
+        }
+        try {
+            List<Node> nodes = (new ContextExpressionBuilder()).visit(xs.get(index)).solve(st, doc);
+            st.peek().putVar(vars.get(index).ID().getText(), nodes);
+            iterateLet(ctx, vars, xs, index + 1);
+        } catch (Exception e) {
+            throw new RuntimeException("Error solving expression", e);
+        }
     }
 }

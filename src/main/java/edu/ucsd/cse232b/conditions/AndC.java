@@ -3,6 +3,8 @@ package edu.ucsd.cse232b.conditions;
 import edu.ucsd.cse232b.Context;
 import org.w3c.dom.Document;
 
+import java.util.Stack;
+
 public class AndC implements Condition {
     private final Condition c1;
     private final Condition c2;
@@ -13,7 +15,7 @@ public class AndC implements Condition {
     }
 
     @Override
-    public boolean solve(Context c, Document doc) throws Exception {
+    public boolean solve(Stack<Context> c, Document doc) throws Exception {
         return c1.solve(c, doc) && c2.solve(c, doc);
     }
 

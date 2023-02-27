@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import java.util.List;
+import java.util.Stack;
 
 public class xIsxC implements Condition {
     final private ContextExp x1;
@@ -17,7 +18,7 @@ public class xIsxC implements Condition {
     }
 
     @Override
-    public boolean solve(Context c, Document doc) throws Exception {
+    public boolean solve(Stack<Context> c, Document doc) throws Exception {
         List<Node> l1 = x1.solve(c, doc);
         List<Node> l2 = x2.solve(c, doc);
         return l1.stream().anyMatch(n1 -> l2.stream().anyMatch(n1::isSameNode));

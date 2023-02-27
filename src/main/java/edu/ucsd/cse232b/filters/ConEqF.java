@@ -6,8 +6,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import java.util.List;
+import java.util.Stack;
 
-public class ConEqF implements ContextFilter{
+public class ConEqF implements ContextFilter {
 
     final private ContextExp ce1;
     final private ContextExp ce2;
@@ -19,7 +20,7 @@ public class ConEqF implements ContextFilter{
     }
 
     @Override
-    public boolean solve(Context c, Document doc) throws Exception {
+    public boolean solve(Stack<Context> c, Document doc) throws Exception {
         List<Node> l1 = ce1.solve(c, doc);
         List<Node> l2 = ce2.solve(c, doc);
         return l1.stream().anyMatch(n1 -> l2.stream().anyMatch(n1::isEqualNode));

@@ -5,8 +5,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import java.util.List;
+import java.util.Stack;
 
 public interface ContextExp {
-        List<Node> solve(Context c, Document doc) throws Exception;
+        List<Node> solve(Stack<Context> c, Document doc) throws Exception;
         String toString();
 }
