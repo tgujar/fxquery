@@ -31,7 +31,8 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
 
     @Override
     public ContextExp visitTextX(ExpressionGrammarParser.TextXContext ctx) {
-        return new StrConst(ctx.strConst().ID().getText());
+        String s = ctx.strConst().STR().getText();
+        return new StrConst(s.substring(1, s.length() - 1));
     }
 
     @Override

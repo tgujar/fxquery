@@ -22,10 +22,6 @@ public class RpFilter implements RelativePath {
     public List<Node> solve(List<Node> ctxList) throws Exception {
         List<Node> nodes = rp.solve(ctxList);
         return nodes.stream().filter(node -> {
-            /*
-               TODO: Find out if filter is applied per output node from the relative path, or per set of
-                output nodes after rp is applied.
-            */
             try {
                 return f.solve(new ArrayList<Node>(Collections.singleton(node)));
             } catch (Exception e) {
