@@ -69,6 +69,42 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
         return visit(ctx.x());
     }
 
+    @Override
+    public ContextExp visitForX(ExpressionGrammarParser.ForXContext ctx) {
+        List<ExpressionGrammarParser.VarContext> vars = ctx.letClause().var();
+        List<ExpressionGrammarParser.XContext> xs = ctx.letClause().x();
+        For f = new For();
+        try {
+            Context newContext = new Context(st.peek());
+            st.push(newContext);
+            iterateFor(ctx, vars, xs, 0, f);
+            st.pop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+
+    private void iterateFor(ExpressionGrammarParser.ForXContext ctx, List<ExpressionGrammarParser.VarContext> vars, List<ExpressionGrammarParser.XContext> xs, int index, For f) throws Exception {
+        if (index == ctx.forClause().var().size()) {
+            if (ctx.letClause() != null) visit(ctx.letClause());
+            if (ctx.whereClause() != null)
+                if ((new ConditionBuilder()).visit(ctx.whereClause()).solve(st, doc)) {
+                    ContextExp exp = visit(ctx.returnClause());
+                    f.add(exp.solve(st, doc));
+                }
+        }
+        try {
+            List<Node> nodes = (new ContextExpressionBuilder()).visit(xs.get(index)).solve(st, doc);
+            for (Node node : nodes) {
+                st.peek().putVar(vars.get(index).ID().getText(), List.of(node));
+                iterateFor(ctx, vars, xs, index + 1, f);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error solving expression", e);
+        }
+    }
+
     private void iterateLet(ExpressionGrammarParser.LetXContext ctx, List<ExpressionGrammarParser.VarContext> vars, List<ExpressionGrammarParser.XContext> xs, int index) {
         if (index == vars.size()) {
             return;
