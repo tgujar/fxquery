@@ -9,7 +9,7 @@ import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -18,10 +18,17 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
     Stack<Context> st;
     Document doc;
 
+    public ContextExpressionBuilder(Stack<Context> st, Document doc) {
+        this.st = st;
+        this.doc = doc;
+    }
+
     @Override
     public ContextExp visitApX(ExpressionGrammarParser.ApXContext ctx) {
         AbsolutePath ap = (new AbsolutePathBuilder()).visit(ctx.ap());
-        return new Ap(ap, Collections.emptyList());
+        List<Node> ctxList = new ArrayList<>();
+        ctxList.add(doc);
+        return new Ap(ap, ctxList);
     }
 
     @Override
@@ -31,8 +38,8 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
 
     @Override
     public ContextExp visitTextX(ExpressionGrammarParser.TextXContext ctx) {
-        String s = ctx.strConst().STR().getText();
-        return new StrConst(s.substring(1, s.length() - 1));
+        String str = ctx.strConst().STR().getText();
+        return new StrConst(str.substring(1, str.length() - 1));
     }
 
     @Override
@@ -46,6 +53,18 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
         ContextExp exp1 = visit(ctx.x(0));
         ContextExp exp2 = visit(ctx.x(1));
         return new Comma(exp1, exp2);
+    }
+
+    @Override
+    public ContextExp visitCommaReturn(ExpressionGrammarParser.CommaReturnContext ctx) {
+        ContextExp exp1 = visit(ctx.r(0));
+        ContextExp exp2 = visit(ctx.r(1));
+        return new Comma(exp1, exp2);
+    }
+
+    @Override
+    public ContextExp visitXReturn(ExpressionGrammarParser.XReturnContext ctx) {
+        return visit(ctx.x());
     }
 
     @Override
@@ -72,8 +91,8 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
 
     @Override
     public ContextExp visitForX(ExpressionGrammarParser.ForXContext ctx) {
-        List<ExpressionGrammarParser.VarContext> vars = ctx.letClause().var();
-        List<ExpressionGrammarParser.XContext> xs = ctx.letClause().x();
+        List<ExpressionGrammarParser.VarContext> vars = ctx.forClause().var();
+        List<ExpressionGrammarParser.XContext> xs = ctx.forClause().x();
         For f = new For();
         try {
             Context newContext = new Context(st.peek());
@@ -89,14 +108,19 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
     private void iterateFor(ExpressionGrammarParser.ForXContext ctx, List<ExpressionGrammarParser.VarContext> vars, List<ExpressionGrammarParser.XContext> xs, int index, For f) throws Exception {
         if (index == ctx.forClause().var().size()) {
             if (ctx.letClause() != null) visit(ctx.letClause());
-            if (ctx.whereClause() != null)
-                if ((new ConditionBuilder()).visit(ctx.whereClause()).solve(st, doc)) {
+            if (ctx.whereClause() != null) {
+                if ((new ConditionBuilder(st, doc)).visit(ctx.whereClause()).solve(st, doc)) {
                     ContextExp exp = visit(ctx.returnClause());
                     f.add(exp.solve(st, doc));
                 }
+            } else {
+                ContextExp exp = visit(ctx.returnClause());
+                f.add(exp.solve(st, doc));
+            }
+            return;
         }
         try {
-            List<Node> nodes = (new ContextExpressionBuilder()).visit(xs.get(index)).solve(st, doc);
+            List<Node> nodes = (new ContextExpressionBuilder(st, doc)).visit(xs.get(index)).solve(st, doc);
             for (Node node : nodes) {
                 st.peek().putVar(vars.get(index).ID().getText(), List.of(node));
                 iterateFor(ctx, vars, xs, index + 1, f);
@@ -111,7 +135,7 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
             return;
         }
         try {
-            List<Node> nodes = (new ContextExpressionBuilder()).visit(xs.get(index)).solve(st, doc);
+            List<Node> nodes = (new ContextExpressionBuilder(st, doc)).visit(xs.get(index)).solve(st, doc);
             st.peek().putVar(vars.get(index).ID().getText(), nodes);
             iterateLet(ctx, vars, xs, index + 1);
         } catch (Exception e) {

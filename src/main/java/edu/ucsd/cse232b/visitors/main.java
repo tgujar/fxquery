@@ -1,6 +1,8 @@
 package edu.ucsd.cse232b.visitors;
 
+import edu.ucsd.cse232b.Context;
 import edu.ucsd.cse232b.expressions.absolute.AbsolutePath;
+import edu.ucsd.cse232b.expressions.contextual.ContextExp;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarLexer;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
 import org.antlr.v4.runtime.CharStreams;
@@ -24,6 +26,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class main {
     private static final String DOCROOT = "j_caesar.xml";
@@ -100,6 +103,31 @@ public class main {
         ctxList.add(xmlDoc);
         List<Node> result = program.solve(ctxList, xmlDoc);
 
+        FileOutputStream f = new FileOutputStream(output_file);
+        Document doc = createDoc(result);
+        writeResult(doc, f);
+    }
+
+    public static void startxq(String[] args) throws Exception {
+        if (args.length != 2) {
+            System.out.println("Format: <Input_XQuery name, for example Input_XQuery.txt> <output file name, for example, output.xml>");
+        }
+        String query = readFile(args[0]);
+        String output_file = args[1];
+
+        Document xmlDoc = loadXMLFrom(DOCROOT);
+        // ref: https://github.com/vishalkks/antlr-tutorial
+        final ExpressionGrammarLexer lexer = new ExpressionGrammarLexer(CharStreams.fromString(query));
+        final CommonTokenStream tokens = new CommonTokenStream(lexer);
+        final ExpressionGrammarParser parser = new ExpressionGrammarParser(tokens);
+        final ParserRuleContext tree = parser.x();
+        Stack<Context> st = new Stack<>();
+        Context init = new Context();
+        st.push(init);
+
+        final ContextExpressionBuilder programBuilder = new ContextExpressionBuilder(st, xmlDoc);
+        final ContextExp program = programBuilder.visit(tree);
+        List<Node> result = program.solve(st, xmlDoc);
         FileOutputStream f = new FileOutputStream(output_file);
         Document doc = createDoc(result);
         writeResult(doc, f);

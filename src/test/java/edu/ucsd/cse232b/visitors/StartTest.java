@@ -92,4 +92,15 @@ class StartTest {
         edu.ucsd.cse232b.visitors.main.start(new String[]{"testfiles/ex12.txt", "testfiles/ex12.xml"});
     }
 
+    @Test
+    void xq1() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq1.txt", "testfiles/xq1.xml"});
+    }
+
+    @Test
+    void xq2() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq2.txt", "testfiles/xq2.xml"});
+    }
+
+
 }

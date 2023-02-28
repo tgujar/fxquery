@@ -25,6 +25,6 @@ public class Comma implements ContextExp{
 
     @Override
     public String toString() {
-        return ce2.toString() + "," + ce2.toString();
+        return ce1.toString() + "," + ce2.toString();
     }
 }

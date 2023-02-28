@@ -1,4 +1,4 @@
-// Generated from java-escape by ANTLR 4.11.1
+// Generated from ExpressionGrammar.g4 by ANTLR 4.7.2
 
 package edu.ucsd.cse232b.parsers;
 
@@ -160,12 +160,12 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRpFilter(ExpressionGrammarParser.RpFilterContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code VarX}
+	 * Visit a parse tree produced by the {@code DSLRpX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVarX(ExpressionGrammarParser.VarXContext ctx);
+	T visitDSLRpX(ExpressionGrammarParser.DSLRpXContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code TextX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
@@ -174,12 +174,12 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTextX(ExpressionGrammarParser.TextXContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ApX}
+	 * Visit a parse tree produced by the {@code CSlRpX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitApX(ExpressionGrammarParser.ApXContext ctx);
+	T visitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code PrX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
@@ -195,19 +195,19 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommaX(ExpressionGrammarParser.CommaXContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code CSlRpX}
+	 * Visit a parse tree produced by the {@code ApX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx);
+	T visitApX(ExpressionGrammarParser.ApXContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code DSLRpX}
+	 * Visit a parse tree produced by the {@code VarX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDSLRpX(ExpressionGrammarParser.DSLRpXContext ctx);
+	T visitVarX(ExpressionGrammarParser.VarXContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code TagX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
@@ -216,19 +216,19 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTagX(ExpressionGrammarParser.TagXContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code LetX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLetX(ExpressionGrammarParser.LetXContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code EqX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitEqX(ExpressionGrammarParser.EqXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code IsX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIsX(ExpressionGrammarParser.IsXContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ForX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
@@ -237,12 +237,12 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitForX(ExpressionGrammarParser.ForXContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code LetX}
+	 * Visit a parse tree produced by the {@code IsX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLetX(ExpressionGrammarParser.LetXContext ctx);
+	T visitIsX(ExpressionGrammarParser.IsXContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExpressionGrammarParser#forClause}.
 	 * @param ctx the parse tree
@@ -267,6 +267,27 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReturnClause(ExpressionGrammarParser.ReturnClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CommaReturn}
+	 * labeled alternative in {@link ExpressionGrammarParser#r}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommaReturn(ExpressionGrammarParser.CommaReturnContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code TagReturn}
+	 * labeled alternative in {@link ExpressionGrammarParser#r}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTagReturn(ExpressionGrammarParser.TagReturnContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code XReturn}
+	 * labeled alternative in {@link ExpressionGrammarParser#r}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXReturn(ExpressionGrammarParser.XReturnContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code OrCond}
 	 * labeled alternative in {@link ExpressionGrammarParser#cond}.

@@ -47,23 +47,28 @@ f
 // XQuery
 
 x
-    : LCR var                                           RCR    #VarX
-    | LCR MT LPR strConst RPR                           RCR    #TextX
-    | LCR ap                                            RCR    #ApX
-    | LCR LPR x RPR                                     RCR    #PrX
-    | LCR x COMMA x                                     RCR    #CommaX
-    | LCR x SL rp                                       RCR    #CSlRpX
-    | LCR x DSL rp                                      RCR    #DSLRpX
-    | LCR tagOpen LCR x RCR tagClose                    RCR    #TagX
-    | LCR x EQ x                                        RCR    #EqX
-    | LCR x IS x                                        RCR    #IsX
-    | LCR forClause letClause? whereClause? returnClause  RCR    #ForX
-    | LCR letClause x                                   RCR    #LetX;
+    : x SL rp                                           #CSlRpX
+    | x DSL rp                                          #DSLRpX
+    | var                                               #VarX
+    | strConst                                          #TextX
+    | ap                                                #ApX
+    | LPR x RPR                                         #PrX
+    | x COMMA x                                         #CommaX
+    | tagOpen LCR x RCR tagClose                        #TagX
+    | x EQ x                                            #EqX
+    | x IS x                                            #IsX
+    | forClause letClause? whereClause? returnClause    #ForX
+    | letClause x                                       #LetX;
 
 forClause : FOR var IN x (COMMA var IN x)* ;
 letClause : LET var ASSIGN x (COMMA var ASSIGN x)* ;
 whereClause : WHERE cond ;
-returnClause : RETURN x ;
+returnClause : RETURN r ;
+
+r
+    : x                                                 #XReturn
+    | r COMMA r                                         #CommaReturn
+    | tagOpen r tagClose                                #TagReturn;
 
 cond
     : x EQ x                                                    #EqCond
@@ -77,12 +82,11 @@ cond
 
 doc : DOC LPR DQ fileName DQ RPR;
 
-
 var         : DOLLAR ID;
 strConst    : STR;
 fileName    : ID ;
 tagName     : ID ;
-attName     : ID;
+attName     : ID ;
 tagOpen     : LAG tagName RAG;
 tagClose    : LAG SL tagName RAG;
 
@@ -110,8 +114,6 @@ RCR: '}';
 EQ: '=' | 'eq';
 IS: '==' | 'is';
 DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
-ID: [a-zA-Z0-9_.-]+;
-STR: ["]('.' | '!' | '?' | '-' | ',' | ':' | ';' | [ a-zA-Z0-9])*["];
 MT: 'makeText';
 FOR: 'for';
 LET: 'let';
@@ -122,4 +124,6 @@ RETURN: 'return';
 EMPTY: 'empty';
 SOME: 'some';
 SATISFIES: 'satisfies';
+ID: [a-zA-Z0-9_.-]+;
+STR: '"'('.' | '!' | '?' | '-' | ',' | ':' | ';' | [ a-zA-Z0-9])*'"';
 WS : [ \t\r\n]+ -> skip ;
