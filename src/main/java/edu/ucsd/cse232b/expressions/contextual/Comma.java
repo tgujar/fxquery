@@ -4,8 +4,11 @@ import edu.ucsd.cse232b.Context;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Comma implements ContextExp{
     private final ContextExp ce1;
@@ -19,8 +22,8 @@ public class Comma implements ContextExp{
     @Override
     public List<Node> solve(Stack<Context> c, Document doc) throws Exception {
         List<Node> l1 = ce1.solve(c, doc);
-        l1.addAll(ce2.solve(c, doc));
-        return l1;
+        List<Node> l2 = ce2.solve(c, doc);
+        return Stream.concat(l1.stream(), l2.stream()).collect(Collectors.toList());
     }
 
     @Override

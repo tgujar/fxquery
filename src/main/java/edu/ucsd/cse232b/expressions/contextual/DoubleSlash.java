@@ -6,6 +6,7 @@ import edu.ucsd.cse232b.expressions.relative.Self;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
@@ -25,7 +26,7 @@ public class DoubleSlash implements ContextExp{
     public List<Node> solve(Stack<Context> c, Document doc) throws Exception {
         return ce.solve(c, doc).stream().map(node -> {
             try {
-                return new edu.ucsd.cse232b.expressions.relative.DoubleSlash(new Self(), child).solve(Collections.singletonList(node));
+                return new edu.ucsd.cse232b.expressions.relative.DoubleSlash(new Self(), child).solve(List.of(node));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

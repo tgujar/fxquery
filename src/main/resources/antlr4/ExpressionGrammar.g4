@@ -18,20 +18,6 @@ Grammar
 /*Rules*/
 //TODO: fix milestone 1
 
-x
-    : x SL rp                                           #CSlRpX
-    | x DSL rp                                          #DSLRpX
-    | var                                               #VarX
-    | strConst                                          #TextX
-    | ap                                                #ApX
-    | LPR x RPR                                         #PrX
-    | x COMMA x                                         #CommaX
-    | tagOpen LCR x RCR tagClose                        #TagX
-    | forClause letClause? whereClause? returnClause    #ForX
-    | x EQ x                                            #EqX
-    | x IS x                                            #IsX
-    | letClause x                                       #LetX;
-
 ap  :  doc DSL rp      #DSlAp
     | doc SL rp       #SlAp;
 
@@ -60,16 +46,24 @@ f
 
 
 // XQuery
+x
+    : x SL rp                                           #CSlRpX
+    | x DSL rp                                          #DSLRpX
+    | x COMMA x                                         #CommaX
+    | x IS x                                            #IsX
+    | x EQ x                                            #EqX
+    | LPR x RPR                                         #PrX
+    | tagOpen LCR x RCR tagClose                        #TagX
+    | forClause letClause? whereClause? returnClause    #ForX
+    | letClause x                                       #LetX
+    | ap                                                #ApX
+    | var                                               #VarX
+    | strConst                                          #TextX ;
 
 forClause : FOR var IN x (COMMA var IN x)* ;
 letClause : LET var ASSIGN x (COMMA var ASSIGN x)* ;
 whereClause : WHERE cond ;
-returnClause : RETURN r ;
-
-r
-    : x                                                 #XReturn
-    | r COMMA r                                         #CommaReturn
-    | tagOpen r tagClose                                #TagReturn;
+returnClause : RETURN x ;
 
 cond
     : x EQ x                                                    #EqCond

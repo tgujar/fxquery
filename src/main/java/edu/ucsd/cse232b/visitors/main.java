@@ -44,12 +44,17 @@ public class main {
 
         // root element
         Document doc = docBuilder.newDocument();
-        Element rootElement = doc.createElement("RESULT");
-        doc.appendChild(rootElement);
-        result.forEach(node -> {
-            rootElement.appendChild(doc.importNode(node, true));
-        });
+        if (result.size() > 1) {
+            Element rootElement = doc.createElement("RESULT");
+            doc.appendChild(rootElement);
+            result.forEach(node -> {
+                rootElement.appendChild(doc.importNode(node, true));
+            });
+        } else if (result.size() == 1) {
+            doc.appendChild(doc.importNode(result.get(0), true));
+        }
         return doc;
+
     }
 
     public static void writeResult(Document doc, OutputStream o) throws Exception {
@@ -80,9 +85,10 @@ public class main {
     }
 
     public static void main(String[] args) throws Exception {
-        start(args);
+        startxq(args);
     }
 
+    @Deprecated
     public static void start(String[] args) throws Exception {
         if (args.length != 2) {
             System.out.println("Format: <Input_XPath_File name, for example XPath.txt> <output file name, for example, output.xml>");

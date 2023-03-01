@@ -10,6 +10,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -61,17 +62,17 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
         return new Comma(exp1, exp2);
     }
 
-    @Override
-    public ContextExp visitCommaReturn(ExpressionGrammarParser.CommaReturnContext ctx) {
-        ContextExp exp1 = visit(ctx.r(0));
-        ContextExp exp2 = visit(ctx.r(1));
-        return new Comma(exp1, exp2);
-    }
-
-    @Override
-    public ContextExp visitXReturn(ExpressionGrammarParser.XReturnContext ctx) {
-        return visit(ctx.x());
-    }
+//    @Override
+//    public ContextExp visitCommaReturn(ExpressionGrammarParser.CommaReturnContext ctx) {
+//        ContextExp exp1 = visit(ctx.r(0));
+//        ContextExp exp2 = visit(ctx.r(1));
+//        return new Comma(exp1, exp2);
+//    }
+//
+//    @Override
+//    public ContextExp visitXReturn(ExpressionGrammarParser.XReturnContext ctx) {
+//        return visit(ctx.x());
+//    }
 
     @Override
     public ContextExp visitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx) {
@@ -128,7 +129,7 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
         try {
             List<Node> nodes = (new ContextExpressionBuilder(st, doc)).visit(xs.get(index)).solve(st, doc);
             for (Node node : nodes) {
-                st.peek().putVar(vars.get(index).ID().getText(), List.of(node));
+                st.peek().putVar(vars.get(index).ID().getText(), List.of((node)));
                 iterateFor(ctx, vars, xs, index + 1, f);
             }
         } catch (Exception e) {

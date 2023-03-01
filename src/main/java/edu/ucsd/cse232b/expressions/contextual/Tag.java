@@ -4,6 +4,7 @@ import edu.ucsd.cse232b.Context;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
@@ -24,7 +25,7 @@ public class Tag implements ContextExp{
             Node child = node.cloneNode(true);
             parent.appendChild(child);
         });
-        return Collections.singletonList(parent);
+        return List.of(parent);
     }
 
     @Override
