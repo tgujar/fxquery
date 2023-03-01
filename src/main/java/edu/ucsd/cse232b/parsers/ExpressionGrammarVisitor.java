@@ -1,4 +1,4 @@
-// Generated from ExpressionGrammar.g4 by ANTLR 4.7.2
+// Generated from java-escape by ANTLR 4.11.1
 
 package edu.ucsd.cse232b.parsers;
 
@@ -12,6 +12,90 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
+	/**
+	 * Visit a parse tree produced by the {@code DSLRpX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDSLRpX(ExpressionGrammarParser.DSLRpXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code TextX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTextX(ExpressionGrammarParser.TextXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CSlRpX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PrX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrX(ExpressionGrammarParser.PrXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CommaX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommaX(ExpressionGrammarParser.CommaXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ApX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitApX(ExpressionGrammarParser.ApXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code VarX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarX(ExpressionGrammarParser.VarXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code TagX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTagX(ExpressionGrammarParser.TagXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LetX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLetX(ExpressionGrammarParser.LetXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code EqX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEqX(ExpressionGrammarParser.EqXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ForX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForX(ExpressionGrammarParser.ForXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IsX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIsX(ExpressionGrammarParser.IsXContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code DSlAp}
 	 * labeled alternative in {@link ExpressionGrammarParser#ap}.
@@ -159,90 +243,6 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRpFilter(ExpressionGrammarParser.RpFilterContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code DSLRpX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDSLRpX(ExpressionGrammarParser.DSLRpXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code TextX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTextX(ExpressionGrammarParser.TextXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code CSlRpX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PrX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrX(ExpressionGrammarParser.PrXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code CommaX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCommaX(ExpressionGrammarParser.CommaXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ApX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitApX(ExpressionGrammarParser.ApXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code VarX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVarX(ExpressionGrammarParser.VarXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code TagX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTagX(ExpressionGrammarParser.TagXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code LetX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLetX(ExpressionGrammarParser.LetXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code EqX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEqX(ExpressionGrammarParser.EqXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ForX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForX(ExpressionGrammarParser.ForXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code IsX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIsX(ExpressionGrammarParser.IsXContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExpressionGrammarParser#forClause}.
 	 * @param ctx the parse tree

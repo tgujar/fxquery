@@ -32,6 +32,12 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
     }
 
     @Override
+    public ContextExp visitTagX(ExpressionGrammarParser.TagXContext ctx) {
+        ContextExp ce = visit(ctx.x());
+        return new Tag(ctx.tagOpen().tagName().getText(), ce);
+    }
+
+    @Override
     public ContextExp visitVarX(ExpressionGrammarParser.VarXContext ctx) {
         return new Var(ctx.var().ID().getText());
     }
