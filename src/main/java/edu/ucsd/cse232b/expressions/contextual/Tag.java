@@ -4,8 +4,10 @@ import edu.ucsd.cse232b.Context;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 public class Tag implements ContextExp{
     private final ContextExp ce;
@@ -17,13 +19,13 @@ public class Tag implements ContextExp{
     }
 
     @Override
-    public List<Node> solve(Context c, Document doc) throws Exception {
+    public List<Node> solve(Stack<Context> c, Document doc) throws Exception {
         Node parent = doc.createElement(tag);
         ce.solve(c, doc).forEach(node -> {
             Node child = node.cloneNode(true);
             parent.appendChild(child);
         });
-        return Collections.singletonList(parent);
+        return List.of(parent);
     }
 
     @Override

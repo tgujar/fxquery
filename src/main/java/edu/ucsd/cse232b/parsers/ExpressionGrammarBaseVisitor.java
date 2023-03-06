@@ -167,7 +167,7 @@ public class ExpressionGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T>
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVarX(ExpressionGrammarParser.VarXContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDSLRpX(ExpressionGrammarParser.DSLRpXContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -181,7 +181,7 @@ public class ExpressionGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T>
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitApX(ExpressionGrammarParser.ApXContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -202,14 +202,7 @@ public class ExpressionGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T>
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitDSLRpX(ExpressionGrammarParser.DSLRpXContext ctx) { return visitChildren(ctx); }
+	@Override public T visitApX(ExpressionGrammarParser.ApXContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -223,14 +216,21 @@ public class ExpressionGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T>
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEqX(ExpressionGrammarParser.EqXContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLetX(ExpressionGrammarParser.LetXContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIsX(ExpressionGrammarParser.IsXContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVarX(ExpressionGrammarParser.VarXContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitEqX(ExpressionGrammarParser.EqXContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -244,7 +244,7 @@ public class ExpressionGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T>
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLetX(ExpressionGrammarParser.LetXContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIsX(ExpressionGrammarParser.IsXContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

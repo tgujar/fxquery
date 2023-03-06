@@ -17,6 +17,7 @@ Grammar
 
 /*Rules*/
 //TODO: fix milestone 1
+
 ap  :  doc DSL rp      #DSlAp
     | doc SL rp       #SlAp;
 
@@ -45,20 +46,19 @@ f
 
 
 // XQuery
-
 x
-    : LCR var                                           RCR    #VarX
-    | LCR MT LPR strConst RPR                           RCR    #TextX
-    | LCR ap                                            RCR    #ApX
-    | LCR LPR x RPR                                     RCR    #PrX
-    | LCR x COMMA x                                     RCR    #CommaX
-    | LCR x SL rp                                       RCR    #CSlRpX
-    | LCR x DSL rp                                      RCR    #DSLRpX
-    | LCR tagOpen LCR x RCR tagClose                    RCR    #TagX
-    | LCR x EQ x                                        RCR    #EqX
-    | LCR x IS x                                        RCR    #IsX
-    | LCR forClause letClause whereClause returnClause  RCR    #ForX
-    | LCR letClause x                                   RCR    #LetX;
+    : x SL rp                                           #CSlRpX
+    | x DSL rp                                          #DSLRpX
+    | x COMMA x                                         #CommaX
+    | x IS x                                            #IsX
+    | x EQ x                                            #EqX
+    | LPR x RPR                                         #PrX
+    | tagOpen LCR x RCR tagClose                        #TagX
+    | forClause letClause? whereClause? returnClause    #ForX
+    | letClause x                                       #LetX
+    | ap                                                #ApX
+    | var                                               #VarX
+    | strConst                                          #TextX ;
 
 forClause : FOR var IN x (COMMA var IN x)* ;
 letClause : LET var ASSIGN x (COMMA var ASSIGN x)* ;
@@ -77,12 +77,11 @@ cond
 
 doc : DOC LPR DQ fileName DQ RPR;
 
-
 var         : DOLLAR ID;
 strConst    : STR;
 fileName    : ID ;
 tagName     : ID ;
-attName     : ID;
+attName     : ID ;
 tagOpen     : LAG tagName RAG;
 tagClose    : LAG SL tagName RAG;
 
@@ -110,8 +109,6 @@ RCR: '}';
 EQ: '=' | 'eq';
 IS: '==' | 'is';
 DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
-ID: [a-zA-Z0-9_.-]+;
-STR: ["]('.' | '!' | '?' | '-' | ',' | ':' | ';' | [ a-zA-Z0-9])*["];
 MT: 'makeText';
 FOR: 'for';
 LET: 'let';
@@ -122,4 +119,6 @@ RETURN: 'return';
 EMPTY: 'empty';
 SOME: 'some';
 SATISFIES: 'satisfies';
+ID: [a-zA-Z0-9_.-]+;
+STR: ["]('.' | '!' | '?' | '-' | ',' | ':' | ';' | [ a-zA-Z0-9])*["];
 WS : [ \t\r\n]+ -> skip ;

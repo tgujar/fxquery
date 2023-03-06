@@ -5,8 +5,8 @@ import edu.ucsd.cse232b.expressions.absolute.AbsolutePath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 public class Ap implements ContextExp{
     private final AbsolutePath ap;
@@ -18,7 +18,7 @@ public class Ap implements ContextExp{
     }
 
     @Override
-    public List<Node> solve(Context ctx, Document doc) throws Exception {
+    public List<Node> solve(Stack<Context> ctx, Document doc) throws Exception {
         return ap.solve(this.ctxList, doc);
     }
 

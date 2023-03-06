@@ -2,12 +2,15 @@ package edu.ucsd.cse232b;
 
 import org.w3c.dom.Node;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Context {
-    private HashMap<String, List<Node>> vars;
+    private HashMap<String, List<Node>> vars = new HashMap<>();
+
+    public Context() {}
 
     public Context(Context c) {
         this.vars = c.getAllVars();
@@ -21,7 +24,7 @@ public class Context {
         return vars.get(p);
     }
 
-    public void putVar(String p, List<Node> nl) {
-        this.vars.put(p, nl);
+    public void putVar(String p, List<Node> vals) {
+        this.vars.put(p, vals);
     }
 }

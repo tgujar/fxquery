@@ -4,24 +4,28 @@ import edu.ucsd.cse232b.Context;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Paren implements ContextExp {
+public class For implements ContextExp {
+    private List<Node> l;
 
-    private final ContextExp ce;
-
-    public Paren(ContextExp ce) {
-        this.ce = ce;
+    public For() {
+        this.l = new ArrayList<>();
     }
 
     @Override
     public List<Node> solve(Stack<Context> c, Document doc) throws Exception {
-        return ce.solve(c, doc);
+        return l;
+    }
+
+    public void add(List<Node> results) {
+        l.addAll(results);
     }
 
     @Override
     public String toString() {
-        return "(" + ce.toString() + ")";
+        return "for expression";
     }
 }
