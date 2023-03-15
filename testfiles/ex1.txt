@@ -1,1 +1,1 @@
-doc("j_caesar.xml")//PERSONA
+document("j_caesar.xml")//ACT

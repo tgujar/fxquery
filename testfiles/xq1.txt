@@ -1,0 +1,8 @@
+<result> {
+for $a in document("j_caesar.xml")//ACT,
+    $sc in $a//SCENE, 
+    $sp in $sc/SPEECH 
+where $sp/LINE/text() = "Et tu, Brute! Then fall, Caesar."
+return $sp/SPEAKER/text(),$a/TITLE/text(),$sc/TITLE/text()
+}
+</result>

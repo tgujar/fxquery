@@ -3,8 +3,7 @@ package edu.ucsd.cse232b.expressions.relative;
 import edu.ucsd.cse232b.filters.Filter;
 import org.w3c.dom.Node;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,12 +21,8 @@ public class RpFilter implements RelativePath {
     public List<Node> solve(List<Node> ctxList) throws Exception {
         List<Node> nodes = rp.solve(ctxList);
         return nodes.stream().filter(node -> {
-            /*
-               TODO: Find out if filter is applied per output node from the relative path, or per set of
-                output nodes after rp is applied.
-            */
             try {
-                return f.solve(new ArrayList<Node>(Collections.singleton(node)));
+                return f.solve(List.of(node));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

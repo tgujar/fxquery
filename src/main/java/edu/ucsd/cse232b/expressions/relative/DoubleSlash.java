@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DoubleSlash implements RelativePath {
     private final RelativePath parent, child;
@@ -21,16 +22,7 @@ public class DoubleSlash implements RelativePath {
         List<Node> self = (new Slash(parent, child)).solve(ctxList);
         List<Node> nodes = parent.solve(ctxList);
         List<Node> descendants = (new DoubleSlash(new Star(), child)).solve(nodes);
-        self.addAll(descendants);
-        return self.stream().distinct().collect(Collectors.toList());
-    }
-
-    private List<Node> solveWithParent(List<Node> parent) throws Exception {
-        if (parent.isEmpty()) return new ArrayList<>(Collections.emptyList());
-        List<Node> self = child.solve(parent);
-        List<Node> children = (new Star()).solve(parent);
-        self.addAll(solveWithParent(children));
-        return self;
+        return Stream.concat(self.stream(), descendants.stream()).distinct().collect(Collectors.toList());
     }
 
     @Override

@@ -16,6 +16,7 @@ Grammar
 */
 
 /*Rules*/
+//TODO: fix milestone 1
 
 ap  :  doc DSL rp      #DSlAp
     | doc SL rp       #SlAp;
@@ -44,15 +45,49 @@ f
     |   rp              #RpFilter ;
 
 
+// XQuery
+x
+    : x SL rp                                           #CSlRpX
+    | x DSL rp                                          #DSLRpX
+    | x COMMA x                                         #CommaX
+    | x IS x                                            #IsX
+    | x EQ x                                            #EqX
+    | LPR x RPR                                         #PrX
+    | tagOpen LCR x RCR tagClose                        #TagX
+    | forClause letClause? whereClause? returnClause    #ForX
+    | letClause x                                       #LetX
+    | ap                                                #ApX
+    | var                                               #VarX
+    | strConst                                          #TextX ;
+
+forClause : FOR var IN x (COMMA var IN x)* ;
+letClause : LET var ASSIGN x (COMMA var ASSIGN x)* ;
+whereClause : WHERE cond ;
+returnClause : RETURN x ;
+
+cond
+    : x EQ x                                                    #EqCond
+    | x IS x                                                    #IsCond
+    | EMPTY LPR x RPR                                         #EmptyCond
+    | SOME var IN x (COMMA var IN x)* SATISFIES cond      #SatisfiesCond
+    | LPR cond RPR                                              #PrCond
+    | cond AND cond                                           #AndCond
+    | cond OR cond                                            #OrCond
+    | NOT cond                                                #NotCond;
+
 doc : DOC LPR DQ fileName DQ RPR;
 
-strConst    : DQ ID DQ;
+var         : DOLLAR ID;
+strConst    : STR;
 fileName    : ID ;
 tagName     : ID ;
 attName     : ID ;
+tagOpen     : LAG tagName RAG;
+tagClose    : LAG SL tagName RAG;
 
 /*Tokens*/
 STAR: '*';
+DOLLAR: '$';
 AT: '@';
 NOT: [nN][oO][tT];
 AND: [aA][nN][dD];
@@ -67,8 +102,23 @@ LSQ: '[';
 RSQ: ']';
 LPR: '(';
 RPR: ')';
+LAG: '<';
+RAG: '>';
+LCR: '{';
+RCR: '}';
 EQ: '=' | 'eq';
 IS: '==' | 'is';
 DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
-ID: [a-zA-Z][a-zA-Z0-9_.-]*;
+MT: 'makeText';
+FOR: 'for';
+LET: 'let';
+IN:  'in';
+ASSIGN: ':=';
+WHERE: 'where';
+RETURN: 'return';
+EMPTY: 'empty';
+SOME: 'some';
+SATISFIES: 'satisfies';
+ID: [a-zA-Z0-9_.-]+;
+STR: ["]('.' | '!' | '?' | '-' | ',' | ':' | ';' | [ a-zA-Z0-9])*["];
 WS : [ \t\r\n]+ -> skip ;

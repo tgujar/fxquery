@@ -1,0 +1,5 @@
+for $a in document("j_caesar.xml")//ACT, 
+    $sc in $a//SCENE, 
+    $sp in $sc/SPEECH 
+where $sp/SPEAKER/text() = "Second Commoner"
+return  <results> { <speaker> {$sp/SPEAKER/text()} </speaker>, for $l in $sp/LINE return <line> {$l/text()} </line>  } </results>
