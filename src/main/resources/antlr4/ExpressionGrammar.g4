@@ -16,7 +16,6 @@ Grammar
 */
 
 /*Rules*/
-//TODO: fix milestone 1
 
 ap  :  doc DSL rp      #DSlAp
     | doc SL rp       #SlAp;

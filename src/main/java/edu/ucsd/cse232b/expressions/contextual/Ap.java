@@ -24,6 +24,6 @@ public class Ap implements ContextExp{
 
     @Override
     public String toString() {
-        return "{" + ap.toString() + "}";
+        return ap.toString();
     }
 }

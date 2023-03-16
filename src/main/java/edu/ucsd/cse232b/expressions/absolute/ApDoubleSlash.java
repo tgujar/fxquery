@@ -11,9 +11,11 @@ import java.util.List;
 public class ApDoubleSlash implements AbsolutePath {
 
     private final RelativePath child;
+    private final String doc;
 
-    public ApDoubleSlash(RelativePath child) {
+    public ApDoubleSlash(RelativePath child, String doc) {
         this.child = child;
+        this.doc = doc;
     }
 
     @Override
@@ -23,6 +25,6 @@ public class ApDoubleSlash implements AbsolutePath {
 
     @Override
     public String toString() {
-        return ".//" + child.toString();
+        return this.doc + "//" + child.toString();
     }
 }

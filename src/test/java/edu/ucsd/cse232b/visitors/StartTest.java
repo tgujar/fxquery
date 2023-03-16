@@ -8,7 +8,7 @@ class StartTest {
     // TODO: make tests check if output is correct
     @Test
     void visible1() throws Exception {
-        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/visible1.txt", "testfiles/visible1.xml"});
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/ex1.txt", "testfiles/visible1.xml"});
     }
 
     @Test

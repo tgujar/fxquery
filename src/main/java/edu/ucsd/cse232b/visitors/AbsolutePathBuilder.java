@@ -11,12 +11,12 @@ public class AbsolutePathBuilder extends ExpressionGrammarBaseVisitor<AbsolutePa
     @Override
     public AbsolutePath visitSlAp(ExpressionGrammarParser.SlApContext ctx) {
         RelativePath rp = (new RelativePathBuilder()).visit(ctx.rp());
-        return new ApSlash(rp);
+        return new ApSlash(rp, ctx.doc().getText());
     }
 
     @Override
     public AbsolutePath visitDSlAp(ExpressionGrammarParser.DSlApContext ctx) {
         RelativePath rp = (new RelativePathBuilder()).visit(ctx.rp());
-        return new ApDoubleSlash(rp);
+        return new ApDoubleSlash(rp, ctx.doc().getText());
     }
 }

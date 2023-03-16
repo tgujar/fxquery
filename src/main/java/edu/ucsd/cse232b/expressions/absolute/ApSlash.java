@@ -10,9 +10,11 @@ import java.util.List;
 public class ApSlash implements AbsolutePath {
 
     private final RelativePath child;
+    private final String doc;
 
-    public ApSlash(RelativePath child) {
+    public ApSlash(RelativePath child, String doc) {
         this.child = child;
+        this.doc = doc;
     }
 
     @Override
@@ -22,6 +24,6 @@ public class ApSlash implements AbsolutePath {
 
     @Override
     public String toString() {
-        return "/" + child.toString();
+        return this.doc + "/" + child.toString();
     }
 }

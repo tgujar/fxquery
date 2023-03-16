@@ -29,7 +29,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class main {
-    private static final String DOCROOT = "j_caesar.xml";
+    public static final String DOCROOT = "j_caesar.xml";
 
     public static Document loadXMLFrom(String filename) throws Exception {
         // ref: https://docs.oracle.com/javase/tutorial/jaxp/dom/readingXML.html

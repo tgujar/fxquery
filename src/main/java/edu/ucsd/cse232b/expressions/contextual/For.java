@@ -28,4 +28,8 @@ public class For implements ContextExp {
     public String toString() {
         return "for expression";
     }
+
+//    public String rewrite() {
+//
+//    }
 }
