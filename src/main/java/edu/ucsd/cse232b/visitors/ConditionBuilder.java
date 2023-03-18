@@ -11,6 +11,7 @@ import org.w3c.dom.Node;
 
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class ConditionBuilder extends ExpressionGrammarBaseVisitor<Condition> {
 
@@ -70,31 +71,13 @@ public class ConditionBuilder extends ExpressionGrammarBaseVisitor<Condition> {
 
     @Override
     public Condition visitSatisfiesCond(ExpressionGrammarParser.SatisfiesCondContext ctx) {
-        List<ExpressionGrammarParser.VarContext> vars = ctx.var();
-        List<ExpressionGrammarParser.XContext> xs = ctx.x();
-        Context newContext = new Context(st.peek());
-        st.push(newContext);
-        SatisfiesC c = null;
-        try {
-            c = new SatisfiesC(iterateSatisfies(ctx, vars, xs, 0).solve(st, doc));
-        } catch (Exception e) {
-            throw new RuntimeException("Error solving expression", e);
-        }
-        st.pop();
-        return c;
-    }
-
-    private Condition iterateSatisfies(ExpressionGrammarParser.SatisfiesCondContext ctx, List<ExpressionGrammarParser.VarContext> vars, List<ExpressionGrammarParser.XContext> xs, int index) {
-        if (index == vars.size()) {
-            return visit(ctx.cond());
-        }
-        try {
-            List<Node> nodes = (new ContextExpressionBuilder(st, doc)).visit(xs.get(index)).solve(st, doc);
-            st.peek().putVar(vars.get(index).ID().getText(), nodes);
-            return iterateSatisfies(ctx, vars, xs, index + 1);
-        } catch (Exception e) {
-            throw new RuntimeException("Error solving expression", e);
-        }
+        List<String> var = ctx.var().stream().map(v -> v.ID().getText()).collect(Collectors.toList());
+        List<ContextExp> exp= ctx.x()
+                                .stream()
+                                .map(x -> (new ContextExpressionBuilder(this.st, this.doc)).visit(x))
+                                .collect(Collectors.toList());
+        Condition cond = visit(ctx.cond());
+        return new SatisfiesC(var, exp, cond);
     }
 }
 
