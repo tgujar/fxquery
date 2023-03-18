@@ -92,17 +92,25 @@ class StartTest {
         edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/ex12.txt", "testfiles/ex12.xml"});
     }
 
+
+
     @Test
+    @DisplayName("Test 13")
     void xq1() throws Exception {
         edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq1.txt", "testfiles/xq1.xml"});
     }
 
+
+
     @Test
+    @DisplayName("Test 14")
     void xq2() throws Exception {
         edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq2.txt", "testfiles/xq2.xml"});
     }
 
+
     @Test
+    @DisplayName("Test 15")
     void xq3() throws Exception {
         edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq3.txt", "testfiles/xq3.xml"});
     }

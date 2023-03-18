@@ -5,7 +5,7 @@ import org.w3c.dom.Document;
 
 import java.util.Stack;
 
-
+@Deprecated
 public interface ContextFilter {
     boolean solve(Stack<Context> c, Document doc) throws Exception;
 

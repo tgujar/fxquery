@@ -7,7 +7,7 @@ import org.w3c.dom.Node;
 
 import java.util.List;
 import java.util.Stack;
-
+@Deprecated
 public class ConEqF implements ContextFilter {
 
     final private ContextExp ce1;

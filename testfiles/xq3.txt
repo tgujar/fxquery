@@ -1,5 +1,7 @@
-for $a in document("j_caesar.xml")//ACT, 
-    $sc in $a//SCENE, 
-    $sp in $sc/SPEECH 
-where $sp/SPEAKER/text() = "Second Commoner"
-return  <results> { <speaker> {$sp/SPEAKER/text()} </speaker>, for $l in $sp/LINE return <line> {$l/text()} </line>  } </results>
+<acts>{
+ for $a in doc("j_caesar.xml")//ACT
+ where not empty (
+ for $sp in $a/SCENE/SPEECH
+ where ($sp/SPEAKER/text() = "FLAVIUS" and $sp/../TITLE/text()="SCENE I.  Rome. A street.")
+ return <speaker>{ $sp/text() }</speaker> )
+ return <act>{$a/TITLE/text()}</act> }</acts>
