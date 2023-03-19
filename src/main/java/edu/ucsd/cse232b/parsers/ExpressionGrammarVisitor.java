@@ -181,13 +181,6 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code PrX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrX(ExpressionGrammarParser.PrXContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code CommaX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
@@ -195,33 +188,19 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommaX(ExpressionGrammarParser.CommaXContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code JoinX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoinX(ExpressionGrammarParser.JoinXContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ApX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitApX(ExpressionGrammarParser.ApXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code TagX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTagX(ExpressionGrammarParser.TagXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code LetX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLetX(ExpressionGrammarParser.LetXContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code VarX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVarX(ExpressionGrammarParser.VarXContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code EqX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
@@ -243,6 +222,34 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIsX(ExpressionGrammarParser.IsXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PrX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrX(ExpressionGrammarParser.PrXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code TagX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTagX(ExpressionGrammarParser.TagXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LetX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLetX(ExpressionGrammarParser.LetXContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code VarX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarX(ExpressionGrammarParser.VarXContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ExpressionGrammarParser#forClause}.
 	 * @param ctx the parse tree
@@ -267,6 +274,18 @@ public interface ExpressionGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReturnClause(ExpressionGrammarParser.ReturnClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionGrammarParser#joinClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoinClause(ExpressionGrammarParser.JoinClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ExpressionGrammarParser#idList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdList(ExpressionGrammarParser.IdListContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code OrCond}
 	 * labeled alternative in {@link ExpressionGrammarParser#cond}.

@@ -298,18 +298,6 @@ public interface ExpressionGrammarListener extends ParseTreeListener {
 	 */
 	void exitCSlRpX(ExpressionGrammarParser.CSlRpXContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code PrX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 */
-	void enterPrX(ExpressionGrammarParser.PrXContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code PrX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 */
-	void exitPrX(ExpressionGrammarParser.PrXContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code CommaX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
@@ -322,6 +310,18 @@ public interface ExpressionGrammarListener extends ParseTreeListener {
 	 */
 	void exitCommaX(ExpressionGrammarParser.CommaXContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code JoinX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoinX(ExpressionGrammarParser.JoinXContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code JoinX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoinX(ExpressionGrammarParser.JoinXContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ApX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
 	 * @param ctx the parse tree
@@ -333,42 +333,6 @@ public interface ExpressionGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitApX(ExpressionGrammarParser.ApXContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code TagX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 */
-	void enterTagX(ExpressionGrammarParser.TagXContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code TagX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 */
-	void exitTagX(ExpressionGrammarParser.TagXContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code LetX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 */
-	void enterLetX(ExpressionGrammarParser.LetXContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code LetX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 */
-	void exitLetX(ExpressionGrammarParser.LetXContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code VarX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 */
-	void enterVarX(ExpressionGrammarParser.VarXContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code VarX}
-	 * labeled alternative in {@link ExpressionGrammarParser#x}.
-	 * @param ctx the parse tree
-	 */
-	void exitVarX(ExpressionGrammarParser.VarXContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code EqX}
 	 * labeled alternative in {@link ExpressionGrammarParser#x}.
@@ -405,6 +369,54 @@ public interface ExpressionGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIsX(ExpressionGrammarParser.IsXContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PrX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrX(ExpressionGrammarParser.PrXContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PrX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrX(ExpressionGrammarParser.PrXContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code TagX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void enterTagX(ExpressionGrammarParser.TagXContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code TagX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void exitTagX(ExpressionGrammarParser.TagXContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code LetX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void enterLetX(ExpressionGrammarParser.LetXContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LetX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void exitLetX(ExpressionGrammarParser.LetXContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code VarX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarX(ExpressionGrammarParser.VarXContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code VarX}
+	 * labeled alternative in {@link ExpressionGrammarParser#x}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarX(ExpressionGrammarParser.VarXContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ExpressionGrammarParser#forClause}.
 	 * @param ctx the parse tree
@@ -445,6 +457,26 @@ public interface ExpressionGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturnClause(ExpressionGrammarParser.ReturnClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionGrammarParser#joinClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoinClause(ExpressionGrammarParser.JoinClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionGrammarParser#joinClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoinClause(ExpressionGrammarParser.JoinClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ExpressionGrammarParser#idList}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdList(ExpressionGrammarParser.IdListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ExpressionGrammarParser#idList}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdList(ExpressionGrammarParser.IdListContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code OrCond}
 	 * labeled alternative in {@link ExpressionGrammarParser#cond}.

@@ -55,6 +55,7 @@ x
     | tagOpen LCR x RCR tagClose                        #TagX
     | forClause letClause? whereClause? returnClause    #ForX
     | letClause x                                       #LetX
+    | joinClause                                        #JoinX
     | ap                                                #ApX
     | var                                               #VarX
     | strConst                                          #TextX ;
@@ -63,6 +64,9 @@ forClause : FOR var IN x (COMMA var IN x)* ;
 letClause : LET var ASSIGN x (COMMA var ASSIGN x)* ;
 whereClause : WHERE cond ;
 returnClause : RETURN x ;
+
+joinClause : JOIN LPR x COMMA x COMMA idList COMMA idList RPR;
+idList : LSQ ID (COMMA ID)* RSQ;
 
 cond
     : x EQ x                                                    #EqCond
@@ -111,6 +115,7 @@ DOC: [dD][oO][cC] | [dD][oO][cC][uU][mM][eE][nN][tT];
 MT: 'makeText';
 FOR: 'for';
 LET: 'let';
+JOIN: 'join';
 IN:  'in';
 ASSIGN: ':=';
 WHERE: 'where';
