@@ -1,14 +1,16 @@
 package edu.ucsd.cse232b.conditions;
 
 import edu.ucsd.cse232b.Context;
+import edu.ucsd.cse232b.expressions.SubsetGrammar;
 import edu.ucsd.cse232b.expressions.contextual.ContextExp;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class xEqxC implements Condition {
+public class xEqxC implements Condition, SubsetCond {
     final private ContextExp x1;
     final private ContextExp x2;
 
@@ -28,4 +30,18 @@ public class xEqxC implements Condition {
     public String toString() {
         return String.format("%s eq %s", x1.toString(), x2.toString());
     }
+
+    @Override
+    public List<List<ContextExp>> getEqCompares() {
+        if (!(x1 instanceof SubsetGrammar) || !(x2 instanceof SubsetGrammar)) {
+            throw new RuntimeException("Subset grammar only supports Vars or StrConst for Eq operation");
+        }
+        List<List<ContextExp>> res= new ArrayList<>();
+        res.add(new ArrayList<>());
+        res.get(0).add(x1);
+        res.get(0).add(x2);
+        return res;
+    }
+
+
 }

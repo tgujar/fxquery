@@ -1,18 +1,14 @@
 package edu.ucsd.cse232b.rewriter;
 
 import edu.ucsd.cse232b.Context;
-import edu.ucsd.cse232b.expressions.contextual.ContextExp;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarLexer;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
-import edu.ucsd.cse232b.visitors.ContextExpressionBuilder;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 import java.io.FileOutputStream;
-import java.util.List;
 import java.util.Stack;
 
 import static edu.ucsd.cse232b.visitors.main.*;
@@ -37,10 +33,7 @@ public class main {
 
         final ContextExpressionRewriter programBuilder = new ContextExpressionRewriter(st, xmlDoc);
         final String program = programBuilder.visit(tree);
-//        List<Node> result = program.solve(st, xmlDoc);
         FileOutputStream f = new FileOutputStream(output_file);
-//        Document doc = createDoc(result);
-//        writeResult(doc, f);
         byte[] bytes = program.getBytes();
         f.write(bytes);
         f.close();

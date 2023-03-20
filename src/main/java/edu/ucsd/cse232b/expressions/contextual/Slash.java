@@ -5,19 +5,19 @@ import edu.ucsd.cse232b.expressions.relative.RelativePath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Slash implements ContextExp {
     private final RelativePath child;
     private final ContextExp ce;
+    private final Set<String> deps;
 
     public Slash(RelativePath child, ContextExp ce) {
         this.child = child;
         this.ce = ce;
+        this.deps = new HashSet<>();
+        this.deps.addAll(ce.getDeps());
     }
 
     @Override
@@ -34,5 +34,14 @@ public class Slash implements ContextExp {
     @Override
     public String toString() {
         return ce.toString() + "/" + child.toString();
+    }
+    @Override
+    public Set<String> getDeps() {
+        return this.deps;
+    }
+
+    @Override
+    public String rewrite() {
+        return ce.rewrite() + "/" + child.toString();
     }
 }

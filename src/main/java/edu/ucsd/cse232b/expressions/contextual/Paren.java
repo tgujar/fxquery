@@ -5,14 +5,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 public class Paren implements ContextExp {
 
     private final ContextExp ce;
+    private final Set<String> deps;
 
     public Paren(ContextExp ce) {
         this.ce = ce;
+        this.deps = ce.getDeps();
     }
 
     @Override
@@ -23,5 +26,15 @@ public class Paren implements ContextExp {
     @Override
     public String toString() {
         return "(" + ce.toString() + ")";
+    }
+
+    @Override
+    public Set<String> getDeps() {
+        return this.deps;
+    }
+
+    @Override
+    public String rewrite() {
+        return "(" + ce.rewrite() + ")";
     }
 }
