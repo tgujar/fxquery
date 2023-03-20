@@ -44,7 +44,7 @@ public class For implements ContextExp{
         List<Node> res = new ArrayList<>();
         List<Node> values = for_exp.get(idx).solve(c, doc);
         for (Node value : values) {
-            c.peek().putVar(for_vars.get(idx).toString(), List.of(value));
+            c.peek().putVar(for_vars.get(idx).getVarName(), List.of(value));
             if (idx == (this.for_vars.size() - 1)) {
                 if (let_exp != null) {
                     let_exp.solve(c, doc); // add more vars
