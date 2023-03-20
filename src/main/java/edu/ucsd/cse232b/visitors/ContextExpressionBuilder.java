@@ -8,6 +8,7 @@ import edu.ucsd.cse232b.expressions.relative.RelativePath;
 
 import edu.ucsd.cse232b.parsers.ExpressionGrammarBaseVisitor;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -94,5 +95,14 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
         Condition cond = ctx.whereClause() != null ? (new ConditionBuilder(this.st, this.doc)).visit(ctx.whereClause()) : null;
         ContextExp ret = visit(ctx.returnClause().x());
         return new For(for_vars, for_exp, let_exp, cond, ret);
+    }
+
+    @Override
+    public ContextExp visitJoinX(ExpressionGrammarParser.JoinXContext ctx) {
+        ContextExp exp1 = visit(ctx.joinClause().x(0));
+        ContextExp exp2 = visit(ctx.joinClause().x(1));
+        List<String> attList1 = ctx.joinClause().idList(0).ID().stream().map(ParseTree::getText).toList();
+        List<String> attList2 = ctx.joinClause().idList(1).ID().stream().map(ParseTree::getText).toList();
+        return new Join(exp1, exp2, attList1, attList2);
     }
 }

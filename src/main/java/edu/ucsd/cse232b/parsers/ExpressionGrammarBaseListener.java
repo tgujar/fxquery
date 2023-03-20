@@ -307,18 +307,6 @@ public class ExpressionGrammarBaseListener implements ExpressionGrammarListener 
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrX(ExpressionGrammarParser.PrXContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPrX(ExpressionGrammarParser.PrXContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCommaX(ExpressionGrammarParser.CommaXContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -331,6 +319,18 @@ public class ExpressionGrammarBaseListener implements ExpressionGrammarListener 
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterJoinX(ExpressionGrammarParser.JoinXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJoinX(ExpressionGrammarParser.JoinXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterApX(ExpressionGrammarParser.ApXContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -338,42 +338,6 @@ public class ExpressionGrammarBaseListener implements ExpressionGrammarListener 
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitApX(ExpressionGrammarParser.ApXContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTagX(ExpressionGrammarParser.TagXContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTagX(ExpressionGrammarParser.TagXContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterLetX(ExpressionGrammarParser.LetXContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLetX(ExpressionGrammarParser.LetXContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVarX(ExpressionGrammarParser.VarXContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVarX(ExpressionGrammarParser.VarXContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -410,6 +374,54 @@ public class ExpressionGrammarBaseListener implements ExpressionGrammarListener 
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIsX(ExpressionGrammarParser.IsXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrX(ExpressionGrammarParser.PrXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrX(ExpressionGrammarParser.PrXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTagX(ExpressionGrammarParser.TagXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTagX(ExpressionGrammarParser.TagXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLetX(ExpressionGrammarParser.LetXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLetX(ExpressionGrammarParser.LetXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVarX(ExpressionGrammarParser.VarXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVarX(ExpressionGrammarParser.VarXContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -458,6 +470,30 @@ public class ExpressionGrammarBaseListener implements ExpressionGrammarListener 
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturnClause(ExpressionGrammarParser.ReturnClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJoinClause(ExpressionGrammarParser.JoinClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJoinClause(ExpressionGrammarParser.JoinClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIdList(ExpressionGrammarParser.IdListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdList(ExpressionGrammarParser.IdListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
