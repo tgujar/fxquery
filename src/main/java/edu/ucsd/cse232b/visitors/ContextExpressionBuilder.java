@@ -5,7 +5,6 @@ import edu.ucsd.cse232b.conditions.Condition;
 import edu.ucsd.cse232b.expressions.absolute.AbsolutePath;
 import edu.ucsd.cse232b.expressions.contextual.*;
 import edu.ucsd.cse232b.expressions.relative.RelativePath;
-
 import edu.ucsd.cse232b.parsers.ExpressionGrammarBaseVisitor;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -13,7 +12,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
@@ -84,14 +82,23 @@ public class ContextExpressionBuilder extends ExpressionGrammarBaseVisitor<Conte
     public ContextExp visitLetX(ExpressionGrammarParser.LetXContext ctx) {
         List<String> vars = ctx.letClause().var().stream().map(v -> v.ID().getText()).collect(Collectors.toList());
         List<ContextExp> xs = ctx.letClause().x().stream().map(this::visit).collect(Collectors.toList());
-        return new Let(vars, xs);
+        ContextExp x = visit(ctx.x());
+        return new Let(vars, xs, x);
     }
 
     @Override
     public ContextExp visitForX(ExpressionGrammarParser.ForXContext ctx) {
         List<Var> for_vars = ctx.forClause().var().stream().map(v -> new Var(v.ID().getText())).collect(Collectors.toList());
         List<ContextExp> for_exp = ctx.forClause().x().stream().map(this::visit).collect(Collectors.toList());
-        ContextExp let_exp = ctx.letClause() != null ? visit(ctx.letClause()) : null;
+
+
+        ContextExp let_exp = null;
+        if (ctx.letClause() != null) {
+            List<String> vars = ctx.letClause().var().stream().map(v -> v.ID().getText()).collect(Collectors.toList());
+            List<ContextExp> xs = ctx.letClause().x().stream().map(this::visit).collect(Collectors.toList());
+            let_exp = new Let(vars, xs, null);
+        }
+
         Condition cond = ctx.whereClause() != null ? (new ConditionBuilder(this.st, this.doc)).visit(ctx.whereClause()) : null;
         ContextExp ret = visit(ctx.returnClause().x());
         return new For(for_vars, for_exp, let_exp, cond, ret);

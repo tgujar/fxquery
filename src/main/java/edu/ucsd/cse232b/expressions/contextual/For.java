@@ -11,7 +11,7 @@ import org.w3c.dom.Node;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class For implements ContextExp{
+public class For implements ContextExp {
     public final List<Var> for_vars;
     public final List<ContextExp> for_exp;
     public final ContextExp let_exp;
@@ -44,7 +44,7 @@ public class For implements ContextExp{
         List<Node> res = new ArrayList<>();
         List<Node> values = for_exp.get(idx).solve(c, doc);
         for (Node value : values) {
-            c.peek().putVar(for_vars.get(idx).toString(), List.of(value));
+            c.peek().putVar(for_vars.get(idx).getVarName(), List.of(value));
             if (idx == (this.for_vars.size() - 1)) {
                 if (let_exp != null) {
                     let_exp.solve(c, doc); // add more vars
@@ -59,6 +59,28 @@ public class For implements ContextExp{
         c.pop();
         return res;
     }
+
+//    private List<Node> iterate(Stack<Context> c, Document doc, int idx) throws Exception {
+//        List<Node> res = new ArrayList<>();
+//        if (idx == (this.for_vars.size() )) {
+//            if (let_exp != null) {
+//                let_exp.solve(c, doc); // add more vars
+//            }
+//            if (cond == null || cond.solve(c, doc)) {
+//                res.addAll(ret.solve(c, doc));
+//            }
+//            return res;
+//        }
+//        Context newContext = new Context(c.peek());
+//        c.push(newContext);
+//        List<Node> values = for_exp.get(idx).solve(c, doc);
+//        for (Node value : values) {
+//            c.peek().putVar(for_vars.get(idx).getVarName(), List.of(value));
+//            res.addAll(iterate(c, doc, idx + 1));
+//        }
+//        c.pop();
+//        return res;
+//    }
 
     @Override
     public List<Node> solve(Stack<Context> c, Document doc) throws Exception {
@@ -89,7 +111,7 @@ public class For implements ContextExp{
         if (!(this.cond instanceof SubsetCond)) {
             throw new RuntimeException("Condition does not satisfy subset grammar");
         }
-        List<List<ContextExp>> compares = ((SubsetCond)cond).getEqCompares();
+        List<List<ContextExp>> compares = ((SubsetCond) cond).getEqCompares();
 
         Map<String, Integer> varToIdx = new HashMap<>();
         for (int i = 0; i < this.for_vars.size(); i++) {
@@ -103,9 +125,9 @@ public class For implements ContextExp{
         Map<Integer, ContextExp> joined = doJoins(uf, groups, dep_groups, compares, varToIdx);
 
         List<Var> tupleVars = new ArrayList<>();
-        List<ContextExp> tupleExps= new ArrayList<>();
-        for (Map.Entry<Integer, ContextExp> m: joined.entrySet()) {
-            tupleVars.add(new Var("tuple"+ uf.find(m.getKey())));
+        List<ContextExp> tupleExps = new ArrayList<>();
+        for (Map.Entry<Integer, ContextExp> m : joined.entrySet()) {
+            tupleVars.add(new Var("tuple" + uf.find(m.getKey())));
             tupleExps.add(m.getValue());
         }
         // Condition on the join will always be nil, since we cant define variables outside for
@@ -113,7 +135,7 @@ public class For implements ContextExp{
         String tupleReturn = this.ret.rewrite();
         for (int i = 0; i < this.for_vars.size(); i++) { // hack
             Var v = this.for_vars.get(i);
-             tupleReturn = tupleReturn.replace(v.toString(),  "$tuple"+ uf.find(i)+ "/" + v.getVarName() + "/*");
+            tupleReturn = tupleReturn.replace(v.toString(), "$tuple" + uf.find(i) + "/" + v.getVarName() + "/*");
         }
 
         StringBuilder res = new StringBuilder("for ");
@@ -133,8 +155,8 @@ public class For implements ContextExp{
 
     private void mergeCond(SubsetCond ncond) {
         if (this.cond == null) {
-             this.cond = ncond;
-             return;
+            this.cond = ncond;
+            return;
         }
         this.cond = new AndC(this.cond, ncond);
     }
@@ -149,12 +171,12 @@ public class For implements ContextExp{
 
     private List<Set<Integer>> getDepGroups(UnionFind uf, Map<String, Integer> varToIdx, List<List<ContextExp>> compares) {
         List<Set<Integer>> joins = new ArrayList<>();
-        for (List<ContextExp> p: compares) {
+        for (List<ContextExp> p : compares) {
             int dep1 = varToIdx.containsKey(p.get(0).toString()) ? uf.find(varToIdx.get(p.get(0).toString())) : -1;
             int dep2 = varToIdx.containsKey(p.get(1).toString()) ? uf.find(varToIdx.get(p.get(1).toString())) : -1;
             Set<Integer> s = new HashSet<>();
             if (dep1 == -1 && dep2 == -1) s.add(-1);
-            else if (dep1 == -1 ) s.add(dep2);
+            else if (dep1 == -1) s.add(dep2);
             else if (dep2 == -1) s.add(dep1);
             else {
                 s.add(dep1);
@@ -173,13 +195,13 @@ public class For implements ContextExp{
         for (int i = 0; i < dep_groups.size(); i++) {
             Set<Integer> join_parents = dep_groups.get(i);
             if (join_parents.size() == 2) {
-                List<ContextExp> compare_pair= compares.get(i);
+                List<ContextExp> compare_pair = compares.get(i);
                 if (!join_map.containsKey(join_parents)) join_map.put(join_parents, new ArrayList<>());
                 join_map.get(join_parents).add(compare_pair);
             }
         }
 
-        for (Map.Entry<Set<Integer>, List<List<ContextExp>>> g1g2: join_map.entrySet()) {
+        for (Map.Entry<Set<Integer>, List<List<ContextExp>>> g1g2 : join_map.entrySet()) {
             List<Integer> arr = new ArrayList<>(g1g2.getKey());
             arr.set(0, uf.find(arr.get(0)));
             arr.set(1, uf.find(arr.get(1)));
@@ -191,9 +213,9 @@ public class For implements ContextExp{
             g1g2.getValue().forEach(p -> p.forEach(v -> {
                 int parentGroup = uf.find(varToIdx.get(v.toString()));
                 if (parentGroup == arr.get(0)) {
-                    attr1.add(((Var)(v)).getVarName());
+                    attr1.add(((Var) (v)).getVarName());
                 } else if (parentGroup == arr.get(1)) {
-                    attr2.add(((Var)(v)).getVarName());
+                    attr2.add(((Var) (v)).getVarName());
                 }
             }));
             Join j = new Join(groups.get(arr.get(0)), groups.get(arr.get(1)), attr1, attr2);
@@ -238,7 +260,7 @@ public class For implements ContextExp{
 
             // iterate over all the variables to put in the return block
             for (int i = 0; i < for_exp.for_vars.size(); i++) {
-                Var v =  for_exp.for_vars.get(i);
+                Var v = for_exp.for_vars.get(i);
                 children.add(new Tag(v.getVarName(), v)); // create tag with var name, add tag inside
             }
             ContextExp childBlock = children.get(0);
@@ -255,7 +277,7 @@ public class For implements ContextExp{
         for (int i = 0; i < this.for_vars.size(); i++) {
             Set<String> deps = this.for_exp.get(i).getDeps();
             Integer var = varToIdx.get(this.for_vars.get(i).toString());
-            for (String dep: deps) {
+            for (String dep : deps) {
                 if (varToIdx.containsKey(dep)) {
                     uf.union(var, varToIdx.get(dep));
                 }
@@ -268,6 +290,7 @@ class UnionFind {
     public int[] parent;
     public int[] rank;
     public int[] size;
+
     public UnionFind(int n) {
         parent = IntStream.range(0, n).toArray();
         rank = new int[n];
@@ -275,10 +298,12 @@ class UnionFind {
         Arrays.fill(rank, 1);
         Arrays.fill(size, 1);
     }
+
     public int find(int n) {
         if (parent[n] == n) return n;
         return parent[n] = find(parent[n]);
     }
+
     public void union(int x, int y) {
         int px = find(x);
         int py = find(y);

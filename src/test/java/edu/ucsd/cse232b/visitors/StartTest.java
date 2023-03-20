@@ -123,8 +123,76 @@ class StartTest {
 
     @Test
     @DisplayName("Test 17")
+    void xq_vis1() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis1.txt", "testfiles/xq_vis1.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 18")
+    void xq_vis2() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis2.txt", "testfiles/xq_vis2.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 19")
+    void xq_vis3() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis3.txt", "testfiles/xq_vis3.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 20")
+    void xq_vis4() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis4.txt", "testfiles/xq_vis4.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 21")
+    void xq_vis5() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis5.txt", "testfiles/xq_vis5.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 22")
+    void xq_vis6() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis6.txt", "testfiles/xq_vis6.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 23")
+    void xq_vis7() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis7.txt", "testfiles/xq_vis7.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 24")
+    void xq_vis8() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis8.txt", "testfiles/xq_vis8.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 25")
+    void xq_vis9() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis9.txt", "testfiles/xq_vis9.xml"});
+    }
+
+    @Test
+    @DisplayName("Test 26")
+    void xq_vis10() throws Exception {
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_vis10.txt", "testfiles/xq_vis10.xml"});
+    }
+    
+
+    @Test
+    @DisplayName("Test 19")
     void xq_join() throws Exception {
+        long startTime = System.currentTimeMillis();
+        edu.ucsd.cse232b.rewriter.main.main(new String[]{"testfiles/xq_join.txt", "testfiles/xq_join_rw.txt"});
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join_rw.txt", "testfiles/xq_join_rw.xml"});
+        long endTime1 = System.currentTimeMillis();
         edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join.txt", "testfiles/xq_join.xml"});
+        long endTime2 = System.currentTimeMillis();
+        System.out.format("Rewrite Milli = %s, ( S_Start : %s, S_End : %s ) \n", endTime1 - startTime, startTime, endTime1 );
+        System.out.format("Naive Milli = %s, ( S_Start : %s, S_End : %s ) \n", endTime2 - endTime1, endTime1, endTime2 );
     }
 
 

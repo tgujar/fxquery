@@ -1,0 +1,9 @@
+<result>{ 
+for $a in (for $s in doc("j_caesar.xml")//ACT where $s/TITLE/text()="ACT I" return 
+$s), $sc in 
+(for $t in $a/SCENE where $t/TITLE/text()="SCENE I.  Rome. A street." return $t), $sp 
+in (for $d in 
+$sc/SPEECH where $d/LINE/text()="Upon a labouring day without the sign" return $d) 
+where $sp/SPEAKER/text() = "FLAVIUS" 
+return <who>{$sp/SPEAKER/text()}</who>,<when>{ <act>{$a/TITLE/text()}</act>, 
+<scene>{$sc/TITLE/text()}</scene> }</when> }</result> 

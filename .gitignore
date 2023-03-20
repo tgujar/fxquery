@@ -24,6 +24,8 @@ hs_err_pid*
 # test folder output
 testfiles/*.xml
 
+.DS_Store
+
 .idea
 
 target/
