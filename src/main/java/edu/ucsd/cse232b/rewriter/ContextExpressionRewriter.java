@@ -1,7 +1,6 @@
 package edu.ucsd.cse232b.rewriter;
 
 import edu.ucsd.cse232b.Context;
-import edu.ucsd.cse232b.expressions.contextual.*;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarBaseVisitor;
 import edu.ucsd.cse232b.parsers.ExpressionGrammarParser;
 import edu.ucsd.cse232b.visitors.ContextExpressionBuilder;
@@ -66,8 +65,6 @@ public class ContextExpressionRewriter extends ExpressionGrammarBaseVisitor<Stri
 
     @Override
     public String visitForX(ExpressionGrammarParser.ForXContext ctx) {
-        ContextExp ce =  (new ContextExpressionBuilder(this.st, this.doc)).visit(ctx);
-        System.out.println(ce.toString());
-        return ce.rewrite();
+        return (new ContextExpressionBuilder(this.st, this.doc)).visit(ctx).rewrite();
     }
 }

@@ -26,7 +26,6 @@ public class Join implements ContextExp{
     }
 
 
-
     @Override
     public List<Node> solve(Stack<Context> c, Document doc) throws Exception {
         return new ArrayList<>(); // temp

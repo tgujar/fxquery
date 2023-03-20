@@ -100,7 +100,7 @@ public class For implements ContextExp{
         gen_graph(uf, varToIdx);
         List<Set<Integer>> dep_groups = getDepGroups(uf, varToIdx, compares);
         Map<Integer, For> groups = getGroups(uf, dep_groups, compares);
-        Map<Integer, ContextExp> joined = doJoins(uf, groups, dep_groups, compares);
+        Map<Integer, ContextExp> joined = doJoins(uf, groups, dep_groups, compares, varToIdx);
 
         List<Var> tupleVars = new ArrayList<>();
         List<ContextExp> tupleExps= new ArrayList<>();
@@ -111,10 +111,8 @@ public class For implements ContextExp{
         // Condition on the join will always be nil, since we cant define variables outside for
 
         String tupleReturn = this.ret.rewrite();
-        System.out.println(tupleReturn);
         for (int i = 0; i < this.for_vars.size(); i++) { // hack
             Var v = this.for_vars.get(i);
-            System.out.println(v.toString());
              tupleReturn = tupleReturn.replace(v.toString(),  "$tuple"+ uf.find(i)+ "/" + v.getVarName() + "/*");
         }
 
@@ -167,7 +165,7 @@ public class For implements ContextExp{
         return joins;
     }
 
-    private Map<Integer, ContextExp> doJoins(UnionFind uf, Map<Integer, For> groups, List<Set<Integer>> dep_groups, List<List<ContextExp>> compares) {
+    private Map<Integer, ContextExp> doJoins(UnionFind uf, Map<Integer, For> groups, List<Set<Integer>> dep_groups, List<List<ContextExp>> compares, Map<String, Integer> varToIdx) {
         Map<Set<Integer>, List<List<ContextExp>>> join_map = new HashMap<>();
 
         Map<Integer, ContextExp> res = new HashMap<>(groups);
@@ -186,15 +184,20 @@ public class For implements ContextExp{
             arr.set(0, uf.find(arr.get(0)));
             arr.set(1, uf.find(arr.get(1)));
             // if a merge happened before, e.g (1,2), (2,3), (3, 1){1 and 3 are already merged}
-            if (!uf.union(arr.get(0), arr.get(1))) {
+            if (uf.find(arr.get(0)) == uf.find(arr.get(1))) {
                 continue;
             }
             List<String> attr1 = new ArrayList<>(), attr2 = new ArrayList<>();
-            g1g2.getValue().forEach(p -> {
-                attr1.add(((Var)(p.get(0))).getVarName());
-                attr2.add(((Var)(p.get(1))).getVarName());
-            });
+            g1g2.getValue().forEach(p -> p.forEach(v -> {
+                int parentGroup = uf.find(varToIdx.get(v.toString()));
+                if (parentGroup == arr.get(0)) {
+                    attr1.add(((Var)(v)).getVarName());
+                } else if (parentGroup == arr.get(1)) {
+                    attr2.add(((Var)(v)).getVarName());
+                }
+            }));
             Join j = new Join(groups.get(arr.get(0)), groups.get(arr.get(1)), attr1, attr2);
+            uf.union(uf.find(arr.get(0)), uf.find(arr.get(1))); // join the groups
             res.remove(arr.get(0)); // remove old values, they are now joined
             res.remove(arr.get(1));
             res.put(uf.find(arr.get(0)), j); // add the join to the map
@@ -276,10 +279,10 @@ class UnionFind {
         if (parent[n] == n) return n;
         return parent[n] = find(parent[n]);
     }
-    public boolean union(int x, int y) {
+    public void union(int x, int y) {
         int px = find(x);
         int py = find(y);
-        if (px == py) return false;
+        if (px == py) return;
         if (rank[px] > rank[py]) {
             parent[py] = px;
             size[px] += size[py];
@@ -291,6 +294,5 @@ class UnionFind {
             rank[py]++;
             size[py] += size[px];
         }
-        return true;
     }
 }
