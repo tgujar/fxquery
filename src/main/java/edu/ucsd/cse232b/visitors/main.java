@@ -23,10 +23,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class main {
     public static final String DOCROOT = "j_caesar.xml";
@@ -115,12 +112,21 @@ public class main {
     }
 
     public static void startxq(String[] args) throws Exception {
-        if (args.length != 2) {
+        long startTime = System.currentTimeMillis();
+        if (args.length != 2 && args.length != 3) {
             System.out.println("Format: <Input_XQuery name, for example Input_XQuery.txt> <output file name, for example, output.xml>");
         }
-        String query = readFile(args[0]);
+        String fileName = args[0];
+        
+        if (args.length == 3 && Objects.equals(args[2], "1")) {
+            fileName = "rw.txt";
+            edu.ucsd.cse232b.rewriter.main.main(new String[]{args[0], "rw.txt"});
+        } else {
+            fileName = args[0];
+        }
+        String query = readFile(fileName);
         String output_file = args[1];
-
+        
         Document xmlDoc = loadXMLFrom(DOCROOT);
         // ref: https://github.com/vishalkks/antlr-tutorial
         final ExpressionGrammarLexer lexer = new ExpressionGrammarLexer(CharStreams.fromString(query));
@@ -137,5 +143,7 @@ public class main {
         FileOutputStream f = new FileOutputStream(output_file);
         Document doc = createDoc(result);
         writeResult(doc, f);
+        long endTime = System.currentTimeMillis();
+        System.out.format("Milli = %s, ( S_Start : %s, S_End : %s ) \n", endTime - startTime, startTime, endTime );
     }
 }
