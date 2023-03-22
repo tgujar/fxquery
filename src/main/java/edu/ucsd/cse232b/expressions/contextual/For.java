@@ -9,6 +9,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class For implements ContextExp {
@@ -133,9 +135,12 @@ public class For implements ContextExp {
         // Condition on the join will always be nil, since we cant define variables outside for
 
         String tupleReturn = this.ret.rewrite();
-        for (int i = 0; i < this.for_vars.size(); i++) { // hack
+        for (int i = 0; i < this.for_vars.size(); i++) {
             Var v = this.for_vars.get(i);
-            tupleReturn = tupleReturn.replace(v.toString(), "$tuple" + uf.find(i) + "/" + v.getVarName() + "/*");
+            String regex = "\\" + v.toString() + "(?![a-zA-Z0-9])";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(tupleReturn);
+            tupleReturn = matcher.replaceAll("\\$tuple" + uf.find(i) + "/" + v.getVarName() + "/*");
         }
 
         StringBuilder res = new StringBuilder("for ");

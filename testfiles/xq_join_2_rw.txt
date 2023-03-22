@@ -1,0 +1,10 @@
+<result>{for $tuple2 in join (
+ for $a in doc("books_b.xml")//book, 
+$atxt in $a/author/text() 
+return <tuple>{<a>{$a}</a>,<atxt>{$atxt}</atxt>}</tuple>,
+ for $s in doc("books_b.xml")//book, 
+$stxt in $s/author/text() 
+return <tuple>{<s>{$s}</s>,<stxt>{$stxt}</stxt>}</tuple>,
+ [atxt],
+ [stxt]) 
+return <bookgrp>{<author>{$tuple2/atxt/*}</author>,<book>{$tuple2/s/*}</book>}</bookgrp>}</result>

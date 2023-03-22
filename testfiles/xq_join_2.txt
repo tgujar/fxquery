@@ -1,0 +1,9 @@
+<result>{  
+for $a in doc("books_b.xml")//book, 
+$atxt in $a/author/text(), 
+$s in doc("books_b.xml")//book, 
+$stxt in $s/author/text() 
+where $atxt = $stxt 
+return <bookgrp> {<author> { $atxt} </author>, <book> { $s} </book> }</bookgrp>  }</result>  
+
+
