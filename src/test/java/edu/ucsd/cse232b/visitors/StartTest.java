@@ -185,15 +185,22 @@ class StartTest {
     @Test
     @DisplayName("Test 27")
     void xq_join() throws Exception {
-        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join.txt", "testfiles/xq_join.xml", "0"});
-        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join.txt", "testfiles/xq_join_rws.xml", "1"});
+        long startTime = System.currentTimeMillis();
+        edu.ucsd.cse232b.rewriter.main.main(new String[]{"testfiles/xq_join.txt", "testfiles/xq_join_rw.txt"});
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join_rw.txt", "testfiles/xq_join_rw.xml"});
+        long endTime1 = System.currentTimeMillis();
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join.txt", "testfiles/xq_join.xml"});
+        long endTime2 = System.currentTimeMillis();
+        System.out.format("Rewrite Milli = %s, ( S_Start : %s, S_End : %s ) \n", endTime1 - startTime, startTime, endTime1 );
+        System.out.format("Naive Milli = %s, ( S_Start : %s, S_End : %s ) \n", endTime2 - endTime1, endTime1, endTime2 );
     }
 
     @Test
     @DisplayName("Test 28")
     void xq_join_2() throws Exception {
         long startTime = System.currentTimeMillis();
-        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join_2.txt", "testfiles/xq_join_2_rw.xml"});
+        edu.ucsd.cse232b.rewriter.main.main(new String[]{"testfiles/xq_join_2.txt", "testfiles/xq_join_2_rw.txt"});
+        edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join_2_rw.txt", "testfiles/xq_join_2_rw.xml"});
         long endTime1 = System.currentTimeMillis();
         edu.ucsd.cse232b.visitors.main.startxq(new String[]{"testfiles/xq_join_2.txt", "testfiles/xq_join_2.xml"});
         long endTime2 = System.currentTimeMillis();
